@@ -183,7 +183,7 @@ const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
   const data = payload[0].payload;
 
   return (
-    <div className="bg-card border border-border p-4 max-w-xs shadow-lg">
+    <div className="bg-card border border-border shadow-xl ring-1 ring-black/5 p-4 max-w-xs">
       <p className="font-semibold text-foreground mb-1">{data.name}</p>
       <p className="text-2xl font-bold text-primary mb-2">{data.percentage}%</p>
       <p className="text-xs text-muted-foreground leading-relaxed">

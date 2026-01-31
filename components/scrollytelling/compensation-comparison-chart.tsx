@@ -142,7 +142,7 @@ function CustomTooltip({ active, payload, label, viewMode }: CustomTooltipProps)
   const gap = calculateGap();
 
   return (
-    <div className="bg-card border border-border p-4 shadow-lg max-w-xs">
+    <div className="bg-card border border-border shadow-xl ring-1 ring-black/5 p-4 max-w-xs">
       <p className="font-semibold text-foreground text-sm mb-3 pb-2 border-b border-border">
         {label}
       </p>
@@ -255,7 +255,7 @@ export function CompensationComparisonChart() {
               "flex-1 sm:flex-none px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
               viewMode === "compensation"
                 ? "bg-primary text-primary-foreground"
-                : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted/80"
+                : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted/80 hover:scale-[1.02] active:scale-[0.98]"
             )}
           >
             Public vs Private
@@ -270,7 +270,7 @@ export function CompensationComparisonChart() {
               "flex-1 sm:flex-none px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
               viewMode === "gender"
                 ? "bg-primary text-primary-foreground"
-                : "bg-transparent text-muted-foreground hover:bg-muted/80"
+                : "bg-transparent text-muted-foreground hover:bg-muted/80 hover:scale-[1.02] active:scale-[0.98]"
             )}
           >
             Gender Pay Gap

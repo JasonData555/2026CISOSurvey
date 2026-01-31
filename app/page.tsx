@@ -37,13 +37,13 @@ export default function CISOReport2026() {
         <SectionHeader
           eyebrow="Executive Summary"
           title="Critical Inflection Points in Security Leadership"
-          description="The 2026 Global CISO Report reveals fundamental shifts in compensation, reporting structures, and governance—with implications for every security leader's strategic positioning."
+          description="The 2026 Global CISO Report reveals fundamental shifts in compensation, reporting structures, and governance with implications for every security leader's strategic positioning."
         />
 
         <StatGrid columns={3} className="mb-12">
           <MetricCard value="$128K" label="Public-Private Compensation Gap" sentiment="warning" />
           <MetricCard value="30-32%" label="CTO/Engineering Reporting Dominance" sentiment="neutral" />
-          <MetricCard value="95%+" label="AI Governance Immaturity" sentiment="bad" />
+          <MetricCard value="97%" label="Lack Mature Frameworks" sentiment="bad" />
           <MetricCard value="36%" label="Private CISOs Without Liability Protection" sentiment="bad" />
           <MetricCard value="43%" label="Third-Party Risk as #1 Priority" sentiment="warning" />
           <MetricCard value="YOY+" label="NextGen Compensation Growth Outpacing CISO" sentiment="neutral" />
@@ -201,7 +201,7 @@ export default function CISOReport2026() {
         <SectionHeader
           eyebrow="Section 04"
           title="CISO Functional Responsibilities"
-          description="Security leadership encompasses a diverse portfolio of direct responsibilities—from universal operational functions to emerging AI governance—revealing where accountability is concentrated and where critical gaps persist."
+          description="Security leadership encompasses a diverse portfolio of direct responsibilities from universal operational functions to emerging AI governance revealing where accountability is concentrated and where critical gaps persist."
         />
 
         <ContentRow className="mb-16">
@@ -214,8 +214,9 @@ export default function CISOReport2026() {
           </PrimaryColumn>
           <SidebarColumn>
             <MetricCard value="93%" label="CISOs Own Incident Response" sentiment="good" />
-            <MetricCard value="10-12" label="Average Functions Per CISO" sentiment="neutral" />
-            <MetricCard value="30%" label="CISOs Responsible for AI Ethics" sentiment="bad" />
+            <MetricCard value="12" label="Average Functions Per CISO" sentiment="neutral" />
+            <MetricCard value="88%" label="CISO Responsible for IT" sentiment="good" />
+            <MetricCard value="74%" label="CISO Responsible for Product/Application Security" sentiment="good" />
           </SidebarColumn>
         </ContentRow>
 
@@ -223,7 +224,7 @@ export default function CISOReport2026() {
           <PrimaryColumn>
             <CalloutBox variant="insight">
               While 93% of CISOs own Incident Response and 90% manage Cloud Security,
-              only 30% have direct responsibility for AI Ethics—despite 83% owning AI Data Protection.
+              only 30% have direct responsibility for AI Ethics despite 83% owning AI Data Protection.
               This gap between technical control and governance oversight creates the AI leadership vacuum
               explored in the next section.
             </CalloutBox>
@@ -232,13 +233,13 @@ export default function CISOReport2026() {
 
         <ContentRow>
           <PrimaryColumn>
-            <p className="text-muted-foreground leading-relaxed">
+            <CalloutBox variant="insight">
               The data reveals three distinct clusters: <strong>universal operational functions</strong> (Incident Response,
               Cloud Security, SecOps at 88-93%), <strong>converging risk functions</strong> (Privacy, GRC, TPRM at 82-85%),
               and <strong>fragmented emerging functions</strong> (AI Ethics, Post-Quantum Cryptography, Fraud at 18-30%).
               This fragmentation in emerging areas suggests either unclear ownership models or security functions
               still maturing into CISO portfolios.
-            </p>
+            </CalloutBox>
           </PrimaryColumn>
         </ContentRow>
       </SectionWrapper>
@@ -247,7 +248,7 @@ export default function CISOReport2026() {
       <SectionWrapper id="ai-governance">
         <SectionHeader
           eyebrow="Section 05"
-          title="AI Governance Reality"
+          title="AI Governance and Risk Management Maturity"
           description="Organizations face a critical gap between AI adoption velocity and security preparedness, with structural vulnerabilities across governance, technical capability, and executive protection."
         />
 
@@ -289,10 +290,9 @@ export default function CISOReport2026() {
             <AIGovernanceChallengesChart />
           </PrimaryColumn>
           <SidebarColumn>
-            <MetricCard value="24%" label="CISOs Cite Shadow AI as Top Governance Challenge" sentiment="warning" />
+            <MetricCard value="52%" label="Developing but inconsistent" sentiment="warning" />
             <CalloutBox variant="warning">
-              Data exposure emerges as the overwhelming operational concern, with three out of four 
-              CISOs citing it as their primary worry regarding AI tool implementation.
+              Only 25% of organizations report "established and repeatable" AI governance processes with 66% of private and 53% of public companies having no plans to hire dedicated AI security leadership.
             </CalloutBox>
           </SidebarColumn>
         </ContentRow>
@@ -342,8 +342,7 @@ export default function CISOReport2026() {
           </PrimaryColumn>
           <SidebarColumn>
             <CalloutBox variant="insight">
-              Risk quantification and compliance requirements lead as the 
-              primary justification measures for security budget requests.
+              Business Impact Overtakes Compliance 69% justify security budgets via business impact versus 49% through compliance avoidance, marking shift from "cost of doing business" to "enabler of business outcomes."
             </CalloutBox>
           </SidebarColumn>
         </ContentRow>
@@ -366,8 +365,7 @@ export default function CISOReport2026() {
             <NextGenVsCISOCompensationChart />
           </PrimaryColumn>
           <SidebarColumn>
-            <MetricCard value="YOY+" label="NextGen Comp Growth Outpacing CISO Increases" sentiment="warning" />
-            <MetricCard value="12-35" label="Average Direct Reports for NextGen Leaders" sentiment="neutral" />
+            <MetricCard value="37" label="Average Direct Reports" sentiment="neutral" />
           </SidebarColumn>
         </ContentRow>
 
@@ -381,26 +379,31 @@ export default function CISOReport2026() {
               <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Public Companies</p>
-                  <p className="text-3xl font-bold text-primary">68%</p>
+                  <p className="text-3xl font-bold text-primary">65%</p>
                   <p className="text-sm text-muted-foreground">Offer signing bonuses</p>
-                  <p className="text-lg font-semibold text-foreground">$45K avg</p>
+                  <p className="text-lg font-semibold text-foreground">$73K avg</p>
                 </div>
                 <div className="space-y-2">
                   <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Private Companies</p>
-                  <p className="text-3xl font-bold text-[#737373]">52%</p>
+                  <p className="text-3xl font-bold text-[#737373]">53%</p>
                   <p className="text-sm text-muted-foreground">Offer signing bonuses</p>
-                  <p className="text-lg font-semibold text-foreground">$32K avg</p>
+                  <p className="text-lg font-semibold text-foreground">$48K avg</p>
                 </div>
               </div>
             </div>
           </PrimaryColumn>
+          <SidebarColumn>
+            <CalloutBox variant="insight">
+              Private companies offer 53% of NextGen roles with signing bonuses versus 65% for public companies, with public bonuses 53% higher ($73K vs $48K). This suggests private companies using cash incentives to compete with public company stability.
+            </CalloutBox>
+          </SidebarColumn>
         </ContentRow>
 
         <ContentRow>
           <PrimaryColumn>
             <SubsectionHeader
               title="Span of Control"
-              description="NextGen leaders manage leaner teams than historical norms—averaging 12-35 direct reports depending on domain."
+              description="NextGen security leaders manage teams that scale dramatically with company size, from lean startup teams to large enterprise operations."
             />
             <NextGenTeamSizeChart />
           </PrimaryColumn>

@@ -5,55 +5,37 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Sector } from "recharts";
 import { cn } from "@/lib/utils";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
-interface ChallengeData {
-  name: string;
+interface MaturityData {
+  level: string;
   value: number;
   description: string;
   color: string;
 }
 
-const challengesData: ChallengeData[] = [
+const maturityData: MaturityData[] = [
   {
-    name: "Shadow AI",
-    value: 24,
-    description: "Unauthorized AI deployments operating outside security oversight",
+    level: "Developing but Inconsistent",
+    value: 52,
+    description: "AI governance processes exist but lack consistency across the organization. Ad hoc implementation without standardized frameworks.",
+    color: "#ea580c",
+  },
+  {
+    level: "Establish and Repeatable",
+    value: 25,
+    description: "Documented AI governance frameworks with consistent enforcement. Clear policies and accountability structures in place.",
+    color: "#16a34a",
+  },
+  {
+    level: "Initial/Ad Hoc",
+    value: 21,
+    description: "Minimal or no formal AI governance. Reactive approach with limited oversight and documentation.",
+    color: "#dc2626",
+  },
+  {
+    level: "Optimized",
+    value: 2,
+    description: "Fully integrated AI governance with continuous improvement. Proactive risk management and stakeholder alignment.",
     color: "#003087",
-  },
-  {
-    name: "Accountability Definition",
-    value: 24,
-    description: "Unclear ownership of AI risk and decision-making responsibility",
-    color: "#0055c4",
-  },
-  {
-    name: "AI TPRM",
-    value: 19,
-    description: "Third-party risk management for AI vendors and integrations",
-    color: "#404040",
-  },
-  {
-    name: "Transparency",
-    value: 11,
-    description: "Lack of explainability in AI decision-making processes",
-    color: "#737373",
-  },
-  {
-    name: "Enterprise Alignment",
-    value: 9,
-    description: "Misalignment between AI initiatives and security strategy",
-    color: "#a3a3a3",
-  },
-  {
-    name: "Regulatory Compliance",
-    value: 8,
-    description: "Meeting evolving AI governance regulatory requirements",
-    color: "#c4c4c4",
-  },
-  {
-    name: "Other",
-    value: 5,
-    description: "Additional governance challenges including talent and tools",
-    color: "#e0e0e0",
   },
 ];
 
@@ -66,7 +48,7 @@ interface ActiveShapeProps {
   startAngle: number;
   endAngle: number;
   fill: string;
-  payload: ChallengeData;
+  payload: MaturityData;
   percent: number;
   value: number;
 }
@@ -92,7 +74,7 @@ const renderActiveShape = (props: ActiveShapeProps) => {
         startAngle={startAngle}
         endAngle={endAngle}
         fill={fill}
-        style={{ 
+        style={{
           filter: "drop-shadow(0 4px 12px rgba(0, 48, 135, 0.3))",
           transition: "all 0.3s ease-out"
         }}
@@ -144,10 +126,10 @@ export function AIGovernanceChallengesChart({ className }: { className?: string 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "ArrowRight" || event.key === "ArrowDown") {
       event.preventDefault();
-      setActiveIndex((prev) => (prev === null ? 0 : (prev + 1) % challengesData.length));
+      setActiveIndex((prev) => (prev === null ? 0 : (prev + 1) % maturityData.length));
     } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
       event.preventDefault();
-      setActiveIndex((prev) => (prev === null ? 0 : (prev - 1 + challengesData.length) % challengesData.length));
+      setActiveIndex((prev) => (prev === null ? 0 : (prev - 1 + maturityData.length) % maturityData.length));
     } else if (event.key === "Escape") {
       event.preventDefault();
       setActiveIndex(null);
@@ -160,13 +142,13 @@ export function AIGovernanceChallengesChart({ className }: { className?: string 
     }
   };
 
-  const activeChallenge = activeIndex !== null ? challengesData[activeIndex] : null;
+  const activeMaturity = activeIndex !== null ? maturityData[activeIndex] : null;
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        "w-full bg-card border border-border p-6 md:p-8 transition-all",
+        "w-full bg-card border border-border shadow-sm p-6 md:p-8 transition-all",
         prefersReducedMotion ? "duration-0" : "duration-700",
         isVisible
           ? "opacity-100 translate-y-0"
@@ -183,14 +165,14 @@ export function AIGovernanceChallengesChart({ className }: { className?: string 
           tabIndex={0}
           onKeyDown={handleKeyDown}
           role="img"
-          aria-label={`AI Governance Challenges pie chart. 7 segments showing: Shadow AI ${challengesData[0].value}%, Accountability Definition ${challengesData[1].value}%, AI TPRM ${challengesData[2].value}%, Transparency ${challengesData[3].value}%, Enterprise Alignment ${challengesData[4].value}%, Regulatory Compliance ${challengesData[5].value}%, Other ${challengesData[6].value}%. Use arrow keys to navigate, Enter to select, Escape to deselect.`}
+          aria-label={`AI Governance Maturity pie chart. 4 segments showing: Developing but Inconsistent ${maturityData[0].value}%, Establish and Repeatable ${maturityData[1].value}%, Initial/Ad Hoc ${maturityData[2].value}%, Optimized ${maturityData[3].value}%. Use arrow keys to navigate, Enter to select, Escape to deselect.`}
         >
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 activeIndex={activeIndex !== null ? activeIndex : undefined}
                 activeShape={renderActiveShape}
-                data={challengesData}
+                data={maturityData}
                 cx="50%"
                 cy="50%"
                 innerRadius="55%"
@@ -204,12 +186,12 @@ export function AIGovernanceChallengesChart({ className }: { className?: string 
                 animationEasing="ease-out"
                 style={{ cursor: "pointer", outline: "none" }}
               >
-                {challengesData.map((entry, index) => (
+                {maturityData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={entry.color}
                     stroke="transparent"
-                    style={{ 
+                    style={{
                       outline: "none",
                       transition: "opacity 0.2s ease"
                     }}
@@ -224,26 +206,26 @@ export function AIGovernanceChallengesChart({ className }: { className?: string 
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
             <div className={cn(
               "text-center transition-all duration-300",
-              activeChallenge ? "opacity-0 scale-95" : "opacity-100 scale-100"
+              activeMaturity ? "opacity-0 scale-95" : "opacity-100 scale-100"
             )}>
-              <span className="block text-4xl md:text-5xl font-bold text-[#003087] tracking-tight">
-                95%+
+              <span className="block text-4xl md:text-5xl font-bold text-[#ea580c] tracking-tight">
+                52%
               </span>
-              <span className="block text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-widest mt-2 max-w-[140px] leading-tight">
-                AI Governance Immaturity
+              <span className="block text-[10px] md:text-xs font-medium text-muted-foreground uppercase tracking-widest mt-2 max-w-[140px] leading-tight">
+                Developing but Inconsistent
               </span>
             </div>
-            
-            {activeChallenge && (
+
+            {activeMaturity && (
               <div className={cn(
                 "text-center transition-all duration-300 absolute",
                 "opacity-100 scale-100"
               )}>
-                <span className="block text-4xl md:text-5xl font-bold tracking-tight" style={{ color: activeChallenge.color }}>
-                  {activeChallenge.value}%
+                <span className="block text-4xl md:text-5xl font-bold tracking-tight" style={{ color: activeMaturity.color }}>
+                  {activeMaturity.value}%
                 </span>
                 <span className="block text-xs md:text-sm font-medium text-foreground uppercase tracking-widest mt-2 max-w-[140px] leading-tight">
-                  {activeChallenge.name}
+                  {activeMaturity.level}
                 </span>
               </div>
             )}
@@ -254,21 +236,21 @@ export function AIGovernanceChallengesChart({ className }: { className?: string 
         <div className="space-y-6">
           <div>
             <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">
-              Governance Challenges
+              Maturity Levels
             </h4>
             <div className="space-y-2">
-              {challengesData.map((item, index) => (
+              {maturityData.map((item, index) => (
                 <button
-                  key={item.name}
+                  key={item.level}
                   className={cn(
                     "w-full flex items-center justify-between gap-3 p-3 transition-all duration-200 text-left group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1",
-                    "hover:bg-muted/50",
-                    activeIndex === index && "bg-muted"
+                    "hover:bg-muted/50 hover:shadow-sm transition-shadow",
+                    activeIndex === index && "bg-muted shadow-sm"
                   )}
                   onClick={() => setActiveIndex(activeIndex === index ? null : index)}
                   onMouseEnter={() => setActiveIndex(index)}
                   onMouseLeave={() => setActiveIndex(null)}
-                  aria-label={`${item.name}: ${item.value}%`}
+                  aria-label={`${item.level}: ${item.value}%`}
                   aria-pressed={activeIndex === index}
                 >
                   <div className="flex items-center gap-3">
@@ -280,7 +262,7 @@ export function AIGovernanceChallengesChart({ className }: { className?: string 
                       "text-sm font-medium transition-colors duration-200",
                       activeIndex === index ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
                     )}>
-                      {item.name}
+                      {item.level}
                     </span>
                   </div>
                   <span className={cn(
@@ -297,36 +279,36 @@ export function AIGovernanceChallengesChart({ className }: { className?: string 
           {/* Detail Card */}
           <div className={cn(
             "border-t border-border pt-6 transition-all duration-300",
-            activeChallenge ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+            activeMaturity ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
           )}>
-            {activeChallenge && (
+            {activeMaturity && (
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   <span
                     className="w-2 h-8"
-                    style={{ backgroundColor: activeChallenge.color }}
+                    style={{ backgroundColor: activeMaturity.color }}
                   />
                   <h5 className="text-lg font-semibold text-foreground">
-                    {activeChallenge.name}
+                    {activeMaturity.level}
                   </h5>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed pl-4">
-                  {activeChallenge.description}
+                  {activeMaturity.description}
                 </p>
                 <div className="pl-4">
                   <div className="h-1 bg-muted overflow-hidden">
                     <div
                       className="h-full transition-all duration-500 ease-out"
                       style={{
-                        width: `${activeChallenge.value * 4}%`,
-                        backgroundColor: activeChallenge.color,
+                        width: `${activeMaturity.value * 4}%`,
+                        backgroundColor: activeMaturity.color,
                       }}
                     />
                   </div>
                 </div>
               </div>
             )}
-            {!activeChallenge && (
+            {!activeMaturity && (
               <p className="text-sm text-muted-foreground italic">
                 Hover over a segment or use arrow keys to see details
               </p>
@@ -339,15 +321,15 @@ export function AIGovernanceChallengesChart({ className }: { className?: string 
       <div className="mt-8 pt-6 border-t border-border">
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-1 h-12 bg-[#003087]" />
+            <div className="w-1 h-12 bg-[#ea580c]" />
             <div>
-              <span className="block text-2xl font-bold text-[#003087]">48%</span>
-              <span className="text-xs text-muted-foreground uppercase tracking-wider">Combined Top 2</span>
+              <span className="block text-2xl font-bold text-[#ea580c]">73%</span>
+              <span className="text-xs text-muted-foreground uppercase tracking-wider">Ad Hoc & Inconsistent</span>
             </div>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-            Shadow AI and accountability definition together account for nearly half of all governance concerns, 
-            highlighting the need for clear ownership and visibility into AI deployments.
+            73% have AI governance that is ad hoc and inconsistent (52% developing + 21% initial),
+            with only 25% achieving established and repeatable processes. Just 2% have reached optimized maturity.
           </p>
         </div>
       </div>

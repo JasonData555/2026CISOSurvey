@@ -110,7 +110,7 @@ export function NextGenTeamSizeChart({ className }: { className?: string }) {
             <div
               key={func.name}
               className={cn(
-                "bg-card border border-border p-4 transition-all cursor-pointer",
+                "bg-card border border-border shadow-sm p-4 transition-all cursor-pointer",
                 prefersReducedMotion ? "duration-0" : "duration-300",
                 isHovered && "border-primary shadow-md"
               )}

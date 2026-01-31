@@ -66,7 +66,7 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   const item = payload[0]?.payload;
 
   return (
-    <div className="bg-card border border-border p-4 shadow-lg max-w-xs">
+    <div className="bg-card border border-border shadow-xl ring-1 ring-black/5 p-4 max-w-xs">
       <p className="text-sm font-semibold text-foreground mb-1">{label}</p>
       <p className="text-xs text-muted-foreground mb-3">{item?.description}</p>
       <div className="space-y-2">
@@ -287,7 +287,7 @@ export function AISecurityLeadershipChart({
           <div
             key={item.category}
             className={cn(
-              "p-4 border border-border transition-all duration-200 hover:border-primary cursor-default",
+              "p-4 border border-border shadow-sm transition-all duration-200 hover:border-primary cursor-default",
               index === 0 && "border-l-4 border-l-[#c41e3a]"
             )}
           >

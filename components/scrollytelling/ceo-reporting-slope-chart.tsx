@@ -73,7 +73,7 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
     <div
       ref={containerRef}
       className={cn(
-        "relative w-full bg-card border border-border p-6 md:p-8",
+        "relative w-full bg-card border border-border shadow-sm p-6 md:p-8",
         className
       )}
     >

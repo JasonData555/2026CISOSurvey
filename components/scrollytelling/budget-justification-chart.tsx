@@ -5,14 +5,11 @@ import { cn } from "@/lib/utils";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 const budgetMeasures = [
-  { measure: "Risk Quantification", percentage: 68, description: "Financial impact analysis of potential security incidents" },
-  { measure: "Compliance Requirements", percentage: 62, description: "Regulatory mandates and audit findings" },
-  { measure: "Incident Costs", percentage: 54, description: "Historical breach and incident response costs" },
-  { measure: "Industry Benchmarks", percentage: 48, description: "Peer company security spending comparisons" },
-  { measure: "Threat Intelligence", percentage: 42, description: "Emerging threat landscape and attack trends" },
-  { measure: "Security Maturity Scores", percentage: 38, description: "Framework-based maturity assessments" },
-  { measure: "Board/Audit Committee Requests", percentage: 32, description: "Direct governance-driven requirements" },
-  { measure: "Insurance Requirements", percentage: 28, description: "Cyber insurance policy mandates" },
+  { measure: "Business Impact", percentage: 69, description: "Demonstrating how security enables business outcomes and growth" },
+  { measure: "Attack Surface Expansion", percentage: 58, description: "Quantifying risk from growing digital footprint and threat exposure" },
+  { measure: "Compliance and Regulatory Mandates", percentage: 49, description: "Meeting regulatory requirements and avoiding fines" },
+  { measure: "Financial Metrics and ROI", percentage: 42, description: "Risk-based financial analysis and return on investment calculations" },
+  { measure: "Revenue Percentage Allocation", percentage: 10, description: "Percentage of company revenue allocated to security" },
 ];
 
 export function BudgetJustificationChart({ className }: { className?: string }) {
@@ -42,16 +39,16 @@ export function BudgetJustificationChart({ className }: { className?: string }) 
     <div ref={containerRef} className={cn("w-full", className)}>
       <div className="space-y-3">
         {budgetMeasures.map((item, index) => {
-          const isTop = index < 2;
+          const isTop = index < 3;
           const isHovered = hoveredIndex === index;
 
           return (
             <div
               key={item.measure}
               className={cn(
-                "relative bg-card border border-border p-4 transition-all cursor-pointer",
+                "relative bg-card border border-border shadow-sm p-4 transition-all cursor-pointer",
                 prefersReducedMotion ? "duration-0" : "duration-300",
-                isHovered && "border-primary bg-accent/30"
+                isHovered && "border-primary bg-accent/30 shadow-md -translate-y-0.5"
               )}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -115,25 +112,23 @@ export function BudgetJustificationChart({ className }: { className?: string }) 
       {/* Key Insight */}
       <div className="mt-8 border-l-4 border-primary bg-accent p-4">
         <p className="text-sm text-foreground font-medium">
-          <span className="font-bold text-primary">Risk quantification</span> (68%) and{" "}
-          <span className="font-bold text-primary">compliance requirements</span> (62%) dominate budget 
-          justification approaches, reflecting the shift toward business-aligned security value articulation.
+          Only 10% use percentage-of-revenue models, indicating CISO sophistication in tying security to business value rather than arbitrary formulas.
         </p>
       </div>
 
       {/* Summary Stats */}
       <div className="mt-6 grid grid-cols-3 gap-4">
         <div className="text-center p-4 bg-muted/50">
-          <p className="text-2xl font-bold text-primary">68%</p>
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Use Risk Quant</p>
+          <p className="text-2xl font-bold text-primary">69%</p>
+          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Business Impact</p>
         </div>
         <div className="text-center p-4 bg-muted/50">
-          <p className="text-2xl font-bold text-foreground">62%</p>
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Cite Compliance</p>
+          <p className="text-2xl font-bold text-foreground">58%</p>
+          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Attack Surface</p>
         </div>
         <div className="text-center p-4 bg-muted/50">
-          <p className="text-2xl font-bold text-foreground">54%</p>
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Reference Incidents</p>
+          <p className="text-2xl font-bold text-foreground">49%</p>
+          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Compliance</p>
         </div>
       </div>
     </div>

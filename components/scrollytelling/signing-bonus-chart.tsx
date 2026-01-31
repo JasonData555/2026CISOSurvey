@@ -18,17 +18,17 @@ import { useReducedMotion } from "@/hooks/use-reduced-motion";
 const signingBonusData = [
   {
     category: "Offered Bonus",
-    public: 72,
-    private: 58,
-    publicLabel: "72%",
-    privateLabel: "58%",
+    public: 52,
+    private: 29,
+    publicLabel: "52%",
+    privateLabel: "29%",
   },
   {
     category: "Avg Amount ($K)",
-    public: 65,
-    private: 42,
-    publicLabel: "$65K",
-    privateLabel: "$42K",
+    public: 184,
+    private: 102,
+    publicLabel: "$184K",
+    privateLabel: "$102K",
   },
 ];
 
@@ -49,7 +49,7 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   const data = payload[0].payload;
 
   return (
-    <div className="bg-card border border-border p-4 shadow-lg">
+    <div className="bg-card border border-border shadow-xl ring-1 ring-black/5 p-4">
       <p className="font-semibold text-foreground text-sm mb-3">{label}</p>
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-4">
@@ -102,7 +102,7 @@ export function SigningBonusChart({ className }: { className?: string }) {
     <div ref={containerRef} className={cn("w-full", className)}>
       {/* Summary Cards */}
       <div className="grid grid-cols-2 gap-4 mb-8">
-        <div className="bg-card border border-border p-6">
+        <div className="bg-card border border-border shadow-sm p-6">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-3 h-3 bg-[#003087]" />
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -110,15 +110,15 @@ export function SigningBonusChart({ className }: { className?: string }) {
             </span>
           </div>
           <div className="space-y-1">
-            <p className="text-3xl font-bold text-primary">72%</p>
+            <p className="text-3xl font-bold text-primary">52%</p>
             <p className="text-sm text-muted-foreground">offer signing bonuses</p>
           </div>
           <div className="mt-4 pt-4 border-t border-border">
-            <p className="text-2xl font-bold text-foreground">$65K</p>
+            <p className="text-2xl font-bold text-foreground">$184K</p>
             <p className="text-xs text-muted-foreground">average bonus amount</p>
           </div>
         </div>
-        <div className="bg-card border border-border p-6">
+        <div className="bg-card border border-border shadow-sm p-6">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-3 h-3 bg-[#737373]" />
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -126,18 +126,18 @@ export function SigningBonusChart({ className }: { className?: string }) {
             </span>
           </div>
           <div className="space-y-1">
-            <p className="text-3xl font-bold text-[#737373]">58%</p>
+            <p className="text-3xl font-bold text-[#737373]">29%</p>
             <p className="text-sm text-muted-foreground">offer signing bonuses</p>
           </div>
           <div className="mt-4 pt-4 border-t border-border">
-            <p className="text-2xl font-bold text-foreground">$42K</p>
+            <p className="text-2xl font-bold text-foreground">$102K</p>
             <p className="text-xs text-muted-foreground">average bonus amount</p>
           </div>
         </div>
       </div>
 
       {/* Chart */}
-      <div className="h-56 sm:h-64 md:h-72 w-full" role="img" aria-label="Bar chart comparing signing bonus offerings: Public companies 72% offer bonuses averaging $65K, Private companies 58% offer bonuses averaging $42K">
+      <div className="h-56 sm:h-64 md:h-72 w-full" role="img" aria-label="Bar chart comparing signing bonus offerings: Public companies 52% offer bonuses averaging $184K, Private companies 29% offer bonuses averaging $102K">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={signingBonusData}
@@ -155,7 +155,7 @@ export function SigningBonusChart({ className }: { className?: string }) {
               tick={{ fontSize: 12, fill: "#525252" }}
               tickLine={false}
               axisLine={false}
-              domain={[0, 80]}
+              domain={[0, 200]}
             />
             <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0, 48, 135, 0.04)" }} wrapperStyle={{ zIndex: 1000, pointerEvents: 'none' }} allowEscapeViewBox={{ x: false, y: true }} />
             <Bar
@@ -179,8 +179,8 @@ export function SigningBonusChart({ className }: { className?: string }) {
       {/* Key Insight */}
       <div className="mt-6 border-l-4 border-primary bg-accent p-4">
         <p className="text-sm text-foreground font-medium">
-          Public companies offer signing bonuses <span className="font-bold text-primary">14%</span> more frequently 
-          and at <span className="font-bold text-primary">55%</span> higher amounts than private counterparts, 
+          Public companies offer signing bonuses <span className="font-bold text-primary">79%</span> more frequently
+          and at <span className="font-bold text-primary">80%</span> higher amounts than private counterparts,
           reflecting the need to offset equity cliff risk and accelerate candidate decisions.
         </p>
       </div>
