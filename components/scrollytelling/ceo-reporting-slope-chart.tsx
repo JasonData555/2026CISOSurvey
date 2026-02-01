@@ -7,17 +7,18 @@ import { useReducedMotion } from "@/hooks/use-reduced-motion";
 interface DataPoint {
   label: string;
   shortLabel: string;
-  value: number;
+  ceo: number;
+  cio: number;
   employees: string;
 }
 
 const data: DataPoint[] = [
-  { label: "<500 employees", shortLabel: "<500", value: 32, employees: "Under 500" },
-  { label: "500-1K employees", shortLabel: "500-1K", value: 22, employees: "500 to 1,000" },
-  { label: "1K-2.5K employees", shortLabel: "1K-2.5K", value: 14, employees: "1,000 to 2,500" },
-  { label: "2.5K-5K employees", shortLabel: "2.5K-5K", value: 9, employees: "2,500 to 5,000" },
-  { label: "5K-10K employees", shortLabel: "5K-10K", value: 6, employees: "5,000 to 10,000" },
-  { label: "10K+ employees", shortLabel: "10K+", value: 3, employees: "Over 10,000" },
+  { label: "<500 employees", shortLabel: "<500", ceo: 32, cio: 7, employees: "Under 500" },
+  { label: "500-1K employees", shortLabel: "500-1K", ceo: 28, cio: 12, employees: "500 to 1,000" },
+  { label: "1K-2.5K employees", shortLabel: "1K-2.5K", ceo: 22, cio: 20, employees: "1,000 to 2,500" },
+  { label: "2.5K-5K employees", shortLabel: "2.5K-5K", ceo: 15, cio: 30, employees: "2,500 to 5,000" },
+  { label: "5K-10K employees", shortLabel: "5K-10K", ceo: 8, cio: 38, employees: "5,000 to 10,000" },
+  { label: "10K+ employees", shortLabel: "10K+", ceo: 3, cio: 47, employees: "Over 10,000" },
 ];
 
 export function CEOReportingSlopeChart({ className }: { className?: string }) {
@@ -52,7 +53,7 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
   const paddingLeft = 60;
   const paddingRight = 60;
 
-  const maxValue = 35;
+  const maxValue = 50;
   const minValue = 0;
 
   // Calculate Y position based on value
@@ -80,10 +81,10 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
       {/* Chart Title */}
       <div className="mb-6">
         <h4 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-1">
-          CEO Reporting by Company Size
+          Reporting by Company Size
         </h4>
         <p className="text-xs text-muted-foreground/70">
-          Percentage of CISOs reporting directly to CEO
+          CEO and CIO reporting follows a predictable correlation with organizational scale
         </p>
       </div>
 
@@ -97,7 +98,7 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
           aria-label="Slope chart showing CEO reporting trends declining as company size increases: 32% at under 500 employees, 22% at 500-1K, 14% at 1K-2.5K, 9% at 2.5K-5K, 6% at 5K-10K, and 3% at over 10K employees. Hover over data points for details."
         >
           {/* Y-Axis Grid Lines */}
-          {[0, 10, 20, 30].map((tick) => (
+          {[0, 10, 20, 30, 40, 50].map((tick) => (
             <g key={tick}>
               <line
                 x1={paddingLeft}
@@ -129,12 +130,12 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
             strokeWidth="2"
           />
 
-          {/* Main Slope Line with Animation */}
+          {/* CEO Slope Line with Animation */}
           <path
             d={data
               .map((point, index) => {
                 const x = (paddingLeft / 600) * 600 + (index / (data.length - 1)) * (600 - paddingLeft - paddingRight);
-                const y = getY(point.value);
+                const y = getY(point.ceo);
                 return `${index === 0 ? "M" : "L"} ${x} ${y}`;
               })
               .join(" ")}
@@ -157,11 +158,43 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
             }}
           />
 
-          {/* Gradient Fill Under Line */}
+          {/* CIO Slope Line with Animation */}
+          <path
+            d={data
+              .map((point, index) => {
+                const x = (paddingLeft / 600) * 600 + (index / (data.length - 1)) * (600 - paddingLeft - paddingRight);
+                const y = getY(point.cio);
+                return `${index === 0 ? "M" : "L"} ${x} ${y}`;
+              })
+              .join(" ")}
+            fill="none"
+            stroke="#d97706"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={cn(
+              "transition-all ease-out",
+              prefersReducedMotion ? "duration-0" : "duration-1000",
+              isVisible ? "opacity-100" : "opacity-0"
+            )}
+            style={{
+              strokeDasharray: prefersReducedMotion ? 0 : 1000,
+              strokeDashoffset: prefersReducedMotion ? 0 : (isVisible ? 0 : 1000),
+              transition: prefersReducedMotion
+                ? "none"
+                : "stroke-dashoffset 1.5s ease-out 0.3s, opacity 0.3s ease-out",
+            }}
+          />
+
+          {/* Gradient Fills Under Lines */}
           <defs>
             <linearGradient id="slopeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#003087" stopOpacity="0.15" />
               <stop offset="100%" stopColor="#003087" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="cioGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#d97706" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="#d97706" stopOpacity="0" />
             </linearGradient>
           </defs>
           <path
@@ -169,7 +202,7 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
               ${data
                 .map((point, index) => {
                   const x = paddingLeft + (index / (data.length - 1)) * (600 - paddingLeft - paddingRight);
-                  const y = getY(point.value);
+                  const y = getY(point.ceo);
                   return `${index === 0 ? "M" : "L"} ${x} ${y}`;
                 })
                 .join(" ")}
@@ -184,11 +217,31 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
               isVisible ? "opacity-100" : "opacity-0"
             )}
           />
+          <path
+            d={`
+              ${data
+                .map((point, index) => {
+                  const x = paddingLeft + (index / (data.length - 1)) * (600 - paddingLeft - paddingRight);
+                  const y = getY(point.cio);
+                  return `${index === 0 ? "M" : "L"} ${x} ${y}`;
+                })
+                .join(" ")}
+              L ${600 - paddingRight} ${chartHeight - paddingBottom}
+              L ${paddingLeft} ${chartHeight - paddingBottom}
+              Z
+            `}
+            fill="url(#cioGradient)"
+            className={cn(
+              "transition-opacity",
+              prefersReducedMotion ? "duration-0" : "duration-1000 delay-800",
+              isVisible ? "opacity-100" : "opacity-0"
+            )}
+          />
 
           {/* Data Points */}
           {data.map((point, index) => {
             const x = paddingLeft + (index / (data.length - 1)) * (600 - paddingLeft - paddingRight);
-            const y = getY(point.value);
+            const y = getY(point.ceo);
             const isHovered = hoveredIndex === index;
             const isEndpoint = index === 0 || index === data.length - 1;
 
@@ -261,7 +314,7 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
                       transitionDelay: prefersReducedMotion ? "0ms" : `${index * 100 + 1000}ms`,
                     }}
                   >
-                    {point.value}%
+                    {point.ceo}%
                   </text>
                 )}
 
@@ -286,44 +339,66 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
         {/* Hover Tooltip */}
         {hoveredIndex !== null && hoveredIndex !== 0 && hoveredIndex !== data.length - 1 && (
           <div
-            className="absolute pointer-events-none z-10 bg-[#0a0a0a] text-white px-4 py-3 shadow-lg transform -translate-x-1/2 -translate-y-full"
+            className="absolute pointer-events-none z-10 bg-card border border-border shadow-xl ring-1 ring-black/5 p-3 transform -translate-x-1/2 -translate-y-full"
             style={{
               left: `${(paddingLeft / 600) * 100 + (hoveredIndex / (data.length - 1)) * ((600 - paddingLeft - paddingRight) / 600) * 100}%`,
-              top: `${(getY(data[hoveredIndex].value) / chartHeight) * 100 - 4}%`,
+              top: `${(getY(data[hoveredIndex].ceo) / chartHeight) * 100 - 4}%`,
             }}
           >
-            <div className="text-lg font-bold text-white">{data[hoveredIndex].value}%</div>
-            <div className="text-xs text-white/80 whitespace-nowrap">
-              {data[hoveredIndex].employees}
+            <p className="text-xs font-semibold text-foreground mb-2">{data[hoveredIndex].employees}</p>
+            <div className="space-y-1">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-[#003087]" />
+                  <span className="text-xs text-muted-foreground">CEO</span>
+                </div>
+                <span className="text-sm font-bold text-foreground">{data[hoveredIndex].ceo}%</span>
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-[#d97706]" />
+                  <span className="text-xs text-muted-foreground">CIO</span>
+                </div>
+                <span className="text-sm font-bold text-foreground">{data[hoveredIndex].cio}%</span>
+              </div>
             </div>
             {/* Tooltip Arrow */}
-            <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#0a0a0a]" />
+            <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-border" />
           </div>
         )}
       </div>
 
-      {/* Key Insight Footer */}
-      <div className="mt-6 pt-4 border-t border-border">
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-[#003087] rounded-full" />
-              <span className="text-xs text-muted-foreground font-medium">Start: 32%</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <svg className="w-8 h-0.5" viewBox="0 0 32 2">
-                <line x1="0" y1="1" x2="32" y2="1" stroke="#003087" strokeWidth="2" />
-              </svg>
-              <span className="text-xs text-muted-foreground font-medium">Decline Rate</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 border-2 border-[#003087] rounded-full" />
-              <span className="text-xs text-muted-foreground font-medium">End: 3%</span>
+      {/* Legend Footer */}
+      <div className="grid grid-cols-2 gap-6 mt-8 pt-6 border-t border-border">
+        {/* CEO Legend */}
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <span className="block w-2 h-8 bg-[#003087]" />
+            <div>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">CEO</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-sm font-mono text-foreground">32%</span>
+                <span className="text-xs text-muted-foreground">→</span>
+                <span className="text-sm font-mono text-foreground">3%</span>
+              </div>
+              <p className="text-xs text-[#c41e3a] font-medium mt-1">-91% decline</p>
             </div>
           </div>
-          <div className="text-right">
-            <span className="text-2xl font-bold text-[#c41e3a]">-91%</span>
-            <span className="text-xs text-muted-foreground ml-2 uppercase tracking-wider">Total Decline</span>
+        </div>
+
+        {/* CIO Legend */}
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <span className="block w-2 h-8 bg-[#d97706]" />
+            <div>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">CIO</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-sm font-mono text-foreground">7%</span>
+                <span className="text-xs text-muted-foreground">→</span>
+                <span className="text-sm font-mono text-foreground">47%</span>
+              </div>
+              <p className="text-xs text-[#059669] font-medium mt-1">+571% growth</p>
+            </div>
           </div>
         </div>
       </div>

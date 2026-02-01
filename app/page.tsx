@@ -14,6 +14,7 @@ import { ReportingStructureSankeyChart } from "@/components/scrollytelling/repor
 import { AIGovernanceChallengesChart } from "@/components/scrollytelling/ai-governance-challenges-chart";
 import { ConfidenceMeterVisualization } from "@/components/scrollytelling/confidence-meter-visualization";
 import { CEOReportingSlopeChart } from "@/components/scrollytelling/ceo-reporting-slope-chart";
+import { BoardReportingChart } from "@/components/scrollytelling/board-reporting-chart";
 import { ThreatPrioritiesTreemap } from "@/components/charts/threat-priorities-treemap";
 import { AISecurityLeadershipChart } from "@/components/scrollytelling/ai-security-leadership-chart";
 import { Footer } from "@/components/scrollytelling/footer";
@@ -144,20 +145,26 @@ export default function CISOReport2026() {
           </PrimaryColumn>
         </ContentRow>
 
-        <ContentRow>
+        <ContentRow className="mb-16">
           <PrimaryColumn>
             <SubsectionHeader
               title="Company Size Dictates Access"
-              description="CEO reporting follows a predictable inverse correlation with organizational scale."
+              description="Reporting to the CEO drops significantly as company size grows, while CIO reporting increases proportionally. Board reporting frequency also varies substantially between public and private companies."
             />
             <CEOReportingSlopeChart />
           </PrimaryColumn>
           <SidebarColumn>
             <CalloutBox variant="insight">
-              At companies under 500 employees, 32% of CISOs report directly to the CEO. 
+              At companies under 500 employees, 32% of CISOs report directly to the CEO.
               This collapses to just 3% at enterprises exceeding 10,000 employees.
             </CalloutBox>
           </SidebarColumn>
+        </ContentRow>
+
+        <ContentRow>
+          <PrimaryColumn>
+            <BoardReportingChart />
+          </PrimaryColumn>
         </ContentRow>
       </SectionWrapper>
 
