@@ -196,7 +196,6 @@ export function BoardReportingChart({ className }: { className?: string }) {
               name="Public"
               fill={companyColors.public}
               maxBarSize={20}
-              radius={[10, 10, 10, 10]}
               animationBegin={0}
               animationDuration={animationDuration}
               animationEasing="ease-out"
@@ -207,7 +206,6 @@ export function BoardReportingChart({ className }: { className?: string }) {
               name="Private"
               fill={companyColors.private}
               maxBarSize={20}
-              radius={[10, 10, 10, 10]}
               opacity={0.7}
               animationBegin={prefersReducedMotion ? 0 : 200}
               animationDuration={animationDuration}
