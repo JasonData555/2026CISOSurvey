@@ -17,9 +17,10 @@ const navItems: NavItem[] = [
   { id: "reporting-structure", label: "Reporting" },
   { id: "team-dynamics", label: "Teams" },
   { id: "functional-responsibilities", label: "Responsibilities" },
-  { id: "ai-governance", label: "AI Governance" },
+  { id: "ai-governance", label: "AI" },
   { id: "threat-landscape", label: "Threats" },
   { id: "nextgen-leaders", label: "NextGen" },
+  { id: "international", label: "International" },
   { id: "recommendations", label: "Strategy" },
 ];
 

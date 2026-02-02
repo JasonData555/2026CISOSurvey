@@ -26,6 +26,9 @@ import { SigningBonusChart } from "@/components/scrollytelling/signing-bonus-cha
 import { BudgetJustificationChart } from "@/components/scrollytelling/budget-justification-chart";
 import { NextGenTeamSizeChart } from "@/components/scrollytelling/nextgen-team-size-chart";
 import { FunctionalResponsibilitiesChart } from "@/components/scrollytelling/functional-responsibilities-chart";
+import { InternationalCompensationChart } from "@/components/scrollytelling/international-compensation-chart";
+import { InternationalTeamSizeChart } from "@/components/scrollytelling/international-team-size-chart";
+import { InternationalResponsibilitiesChart } from "@/components/scrollytelling/international-responsibilities-chart";
 
 export default function CISOReport2026() {
   return (
@@ -526,6 +529,100 @@ export default function CISOReport2026() {
             </CalloutBox>
           </SidebarColumn>
         </ContentRow>
+      </SectionWrapper>
+
+      {/* International CISO Section */}
+      <SectionWrapper id="international" variant="default">
+        <SectionHeader
+          eyebrow="Section 07.5"
+          title="International CISO Landscape"
+          description="European and international CISOs operate in distinctly different contexts; 32% lower compensation, broader regulatory responsibilities, and unique team scaling patterns shaped by GDPR and centralized governance models."
+        />
+
+        {/* Row 1: Compensation Comparison */}
+        <ContentRow className="mb-16">
+          <PrimaryColumn>
+            <SubsectionHeader
+              title="Compensation Gap: International vs. North America"
+              description="International CISOs earn $469K total compensation which is 32% below the North American average of $750K."
+            />
+            <InternationalCompensationChart />
+          </PrimaryColumn>
+          <SidebarColumn>
+            <MetricCard value="$469K" label="Int'l Avg Total Comp" sentiment="neutral" />
+            <MetricCard value="$750K" label="North America Avg" sentiment="neutral" />
+            <MetricCard value="-32%" label="Compensation Gap" sentiment="warning" />
+            <CalloutBox variant="insight">
+              Lower equity prevalence and regional market differences drive the compensation differential.
+              Base salaries show smaller variance ($243K vs $364K North America average).
+            </CalloutBox>
+          </SidebarColumn>
+        </ContentRow>
+
+        {/* Row 2: Team Size Comparison */}
+        <ContentRow className="mb-16">
+          <PrimaryColumn>
+            <SubsectionHeader
+              title="Team Scaling Patterns"
+              description="International teams scale differently, with larger enterprise teams (150 vs 129) but similar trajectories through mid-market phases."
+            />
+            <InternationalTeamSizeChart />
+          </PrimaryColumn>
+          <SidebarColumn>
+            <MetricCard value="150" label="Int'l Team Size at 10K+ Employees" sentiment="neutral" />
+            <MetricCard value="129" label="North America 10K+" sentiment="neutral" />
+            <MetricCard value="+16%" label="Enterprise Scale Difference" sentiment="good" />
+            <CalloutBox variant="insight">
+              Higher enterprise team sizes suggest less federation in international markets,
+              with centralized security models persisting longer as companies scale.
+            </CalloutBox>
+          </SidebarColumn>
+        </ContentRow>
+
+        {/* Row 3: Functional Responsibilities */}
+        <ContentRow className="mb-16">
+          <PrimaryColumn>
+            <SubsectionHeader
+              title="Functional Responsibilities: Regulatory-Driven Priorities"
+              description="International CISOs oversee an average of 10 functions (vs 12 in NA) with significantly higher ownership of TPRM and Privacy."
+            />
+            <InternationalResponsibilitiesChart />
+          </PrimaryColumn>
+          <SidebarColumn>
+            <MetricCard value="85%" label="TPRM Ownership" sentiment="good" />
+            <CalloutBox variant="default" className="text-xs">
+              vs 41% in North America—largest gap (+44pp) driven by GDPR, NIS2, and DORA regulatory emphasis
+            </CalloutBox>
+            <MetricCard value="73%" label="Privacy Ownership" sentiment="good" />
+            <CalloutBox variant="default" className="text-xs">
+              vs 58% in North America (+15pp)—GDPR enforcement and DPO reporting structures
+            </CalloutBox>
+            <MetricCard value="10" label="Avg Functions Per CISO" sentiment="neutral" />
+          </SidebarColumn>
+        </ContentRow>
+
+        {/* Key Takeaways */}
+        <div className="mt-16 border-l-4 border-l-primary bg-accent p-6">
+          <h3 className="text-lg font-semibold text-foreground mb-4">Key Takeaways</h3>
+          <ul className="space-y-3 text-sm text-foreground">
+            <li className="flex gap-3">
+              <span className="text-primary font-bold">1.</span>
+              <span>32% compensation gap driven by equity differences ($152K vs $265K) and regional market dynamics</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary font-bold">2.</span>
+              <span>TPRM ownership 85% vs 41% in North America—reflecting GDPR, NIS2, and DORA regulatory emphasis</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary font-bold">3.</span>
+              <span>Privacy ownership 73% vs 58%—centralized compliance models dominant in international markets</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary font-bold">4.</span>
+              <span>16% larger enterprise teams (150 vs 129) at 10K+ scale suggest less security federation internationally</span>
+            </li>
+          </ul>
+        </div>
       </SectionWrapper>
 
       {/* Strategic Recommendations Section */}
