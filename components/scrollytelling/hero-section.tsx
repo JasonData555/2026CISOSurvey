@@ -14,7 +14,7 @@ export function HeroSection() {
   }, []);
 
   const scrollToContent = () => {
-    const element = document.getElementById("executive-summary");
+    const element = document.getElementById("about");
     if (element) {
       element.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
     }

@@ -33,8 +33,113 @@ export default function CISOReport2026() {
       <Navigation />
       <HeroSection />
 
+      {/* About Section - Introduction & Methodology */}
+      <SectionWrapper id="about">
+        <SectionHeader
+          eyebrow="2026 Global CISO Report"
+          title="Introduction & Methodology"
+          description="Now in its eighth annual edition, this report analyzes the evolving landscape of security leadership through compensation trends, reporting structures, and expanding responsibilities of CISOs and NextGen leaders."
+        />
+
+        <ContentRow className="mb-16">
+          <PrimaryColumn>
+            <SubsectionHeader
+              title="About This Report"
+            />
+            <div className="space-y-6">
+              <p className="text-muted-foreground leading-relaxed">
+                Presented by <strong className="text-foreground">Hitch Partners</strong>,
+                the 2026 Global CISO Report provides critical insight into compensation trends,
+                reporting structures, and the expanding responsibilities of security executives in 2025.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                This year's analysis examines both Chief Information Security Officers (CISOs) and
+                Director-level security leaders. While CISOs continue to shape security strategy and
+                communicate risk at the executive level, Directors—who operate just below the CISO—are
+                playing an increasingly pivotal role in executing strategy, owning key security programs,
+                and driving operational excellence.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                As threats to infrastructure and applications intensify, demand for seasoned security
+                leadership remains high. Both CISOs and Directors are commanding competitive compensation
+                as organizations prioritize security at the highest levels.
+              </p>
+            </div>
+
+            <CalloutBox variant="insight" className="mt-8">
+              Hitch Partners specializes in executive search and sector advocacy, equipping security
+              leaders with data-driven insights to navigate this dynamic field.
+            </CalloutBox>
+          </PrimaryColumn>
+
+          <SidebarColumn>
+            <MetricCard
+              value="625+"
+              label="Survey Respondents"
+              sentiment="neutral"
+            />
+            <MetricCard
+              value="8th"
+              label="Annual Edition"
+              sentiment="neutral"
+            />
+            <MetricCard
+              value="93%"
+              label="North American Coverage"
+              sentiment="neutral"
+            />
+            <CalloutBox variant="default">
+              Survey responses collected between Q4 2025 and Q1 2026 from information
+              security executives across North America and select international markets.
+            </CalloutBox>
+          </SidebarColumn>
+        </ContentRow>
+
+        <ContentRow>
+          <PrimaryColumn>
+            <SubsectionHeader
+              title="Research Methodology"
+              description="Comprehensive survey of information security executives with clear definitions and geographic scope."
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+              <div className="space-y-3">
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">
+                  CISO Definition
+                </h4>
+                <p className="text-muted-foreground leading-relaxed">
+                  Most senior security leader in the organization, including titles such as
+                  CISO, CSO, Head of Security, VP Security, and equivalent roles.
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">
+                  NextGen Definition
+                </h4>
+                <p className="text-muted-foreground leading-relaxed">
+                  Security leaders reporting directly to the CISO, including Deputy CISOs,
+                  Directors, and VPs of specialized security domains.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 space-y-3">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">
+                Geographic Distribution
+              </h4>
+              <p className="text-muted-foreground leading-relaxed">
+                93% of respondents from North America (United States and Canada), with 7%
+                representing international markets including the European Union, United Kingdom,
+                Scandinavia, Middle East, and Australia.
+              </p>
+            </div>
+          </PrimaryColumn>
+        </ContentRow>
+      </SectionWrapper>
+
       {/* Executive Summary Section */}
-      <SectionWrapper id="executive-summary">
+      <SectionWrapper id="executive-summary" variant="muted">
         <SectionHeader
           eyebrow="Executive Summary"
           title="Critical Inflection Points in Security Leadership"

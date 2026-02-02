@@ -11,6 +11,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
+  { id: "about", label: "About" },
   { id: "executive-summary", label: "Summary" },
   { id: "compensation", label: "Compensation" },
   { id: "reporting-structure", label: "Reporting" },
@@ -70,19 +71,7 @@ export function Navigation() {
       aria-label="Main navigation"
     >
       <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo/Title */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" })}
-            className={cn(
-              "font-semibold text-sm tracking-tight transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1",
-              isScrolled ? "text-foreground" : "text-white"
-            )}
-            aria-label="Scroll to top"
-          >
-            CISO Report 2026
-          </button>
-
+        <div className="flex items-center justify-end h-16">
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1" role="list">
             {navItems.map((item) => (
