@@ -66,9 +66,9 @@ export function ReportingStructureSankeyChart({ className }: { className?: strin
   const data = companyType === "private" ? privateCompanyData : publicCompanyData;
 
   const chartConfig = useMemo(() => {
-    const width = 800;
+    const width = 950;
     const height = 400;
-    const padding = { top: 40, right: 140, bottom: 40, left: 80 };
+    const padding = { top: 40, right: 220, bottom: 40, left: 80 };
     const innerWidth = width - padding.left - padding.right;
     const innerHeight = height - padding.top - padding.bottom;
     

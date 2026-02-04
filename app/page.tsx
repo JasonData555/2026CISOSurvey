@@ -82,7 +82,7 @@ export default function CISOReport2026() {
               sentiment="neutral"
             />
             <MetricCard
-              value="8th"
+              value="9th"
               label="Annual Edition"
               sentiment="neutral"
             />
