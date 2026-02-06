@@ -564,7 +564,6 @@ export default function CISOReport2026() {
           <PrimaryColumn>
             <SubsectionHeader
               title="Team Scaling Patterns"
-              description="International teams scale differently, with larger enterprise teams (150 vs 129) but similar trajectories through mid-market phases."
             />
             <InternationalTeamSizeChart />
           </PrimaryColumn>

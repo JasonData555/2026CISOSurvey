@@ -50,7 +50,7 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
   const chartWidth = 100; // percentage-based
   const paddingTop = 50;
   const paddingBottom = 60;
-  const paddingLeft = 60;
+  const paddingLeft = 80;
   const paddingRight = 60;
 
   const maxValue = 50;
@@ -301,9 +301,9 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
                 {/* Value Labels for Endpoints (always visible) */}
                 {isEndpoint && (
                   <text
-                    x={x}
-                    y={y - 24}
-                    textAnchor="middle"
+                    x={index === 0 ? x + 16 : x - 16}
+                    y={y - 20}
+                    textAnchor={index === 0 ? "start" : "end"}
                     className={cn(
                       "fill-[#003087] font-bold transition-all",
                       prefersReducedMotion ? "duration-0" : "duration-300",
@@ -331,6 +331,78 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
                 >
                   {point.shortLabel}
                 </text>
+              </g>
+            );
+          })}
+
+          {/* CIO Data Points and Labels */}
+          {data.map((point, index) => {
+            const x = paddingLeft + (index / (data.length - 1)) * (600 - paddingLeft - paddingRight);
+            const y = getY(point.cio);
+            const isHovered = hoveredIndex === index;
+            const isEndpoint = index === 0 || index === data.length - 1;
+
+            return (
+              <g key={`cio-${index}`}>
+                {/* Outer ring for CIO endpoints */}
+                {isEndpoint && (
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r={isHovered ? 14 : 12}
+                    fill="none"
+                    stroke="#d97706"
+                    strokeWidth="2"
+                    className={cn(
+                      "transition-all",
+                      prefersReducedMotion ? "duration-0" : "duration-300",
+                      isVisible ? "opacity-100" : "opacity-0"
+                    )}
+                    style={{
+                      transitionDelay: prefersReducedMotion ? "0ms" : `${index * 100 + 800}ms`,
+                    }}
+                  />
+                )}
+
+                {/* Main CIO data point */}
+                <circle
+                  cx={x}
+                  cy={y}
+                  r={isEndpoint ? (isHovered ? 8 : 6) : (isHovered ? 7 : 5)}
+                  fill={isEndpoint ? "#d97706" : "#ffffff"}
+                  stroke="#d97706"
+                  strokeWidth={isEndpoint ? 0 : 2}
+                  className={cn(
+                    "transition-all cursor-pointer",
+                    prefersReducedMotion ? "duration-0" : "duration-300",
+                    isVisible ? "opacity-100" : "opacity-0"
+                  )}
+                  style={{
+                    transitionDelay: prefersReducedMotion ? "0ms" : `${index * 100 + 800}ms`,
+                  }}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                />
+
+                {/* CIO Value Labels for Endpoints - positioned ABOVE the data point */}
+                {isEndpoint && (
+                  <text
+                    x={index === 0 ? x + 20 : x - 16}
+                    y={index === 0 ? y - 10 : y - 15}
+                    textAnchor={index === 0 ? "start" : "end"}
+                    className={cn(
+                      "fill-[#d97706] font-bold transition-all",
+                      prefersReducedMotion ? "duration-0" : "duration-300",
+                      isVisible ? "opacity-100" : "opacity-0"
+                    )}
+                    style={{
+                      fontSize: isHovered ? "20px" : "18px",
+                      transitionDelay: prefersReducedMotion ? "0ms" : `${index * 100 + 1000}ms`,
+                    }}
+                  >
+                    {point.cio}%
+                  </text>
+                )}
               </g>
             );
           })}
