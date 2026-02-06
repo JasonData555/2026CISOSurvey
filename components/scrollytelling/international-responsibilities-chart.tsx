@@ -14,7 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
-// Top 15 responsibilities by international percentage
+// All 22 CISO functional responsibilities by international percentage
 const responsibilitiesData = [
   {
     name: "TPRM",
@@ -136,6 +136,62 @@ const responsibilitiesData = [
     fill: "#b8ba5f",
     description: "Business application security - Salesforce, Workday, etc.",
   },
+  {
+    name: "Physical Security / Exec Protection",
+    percentage: 28,
+    naPercentage: 27,
+    gap: 1,
+    fill: "#9db85f",
+    description: "Physical security controls and executive protection programs. Minimal regional variation.",
+  },
+  {
+    name: "Infra Eng",
+    percentage: 23,
+    naPercentage: 23,
+    gap: 0,
+    fill: "#e6c163",
+    description: "Infrastructure engineering and secure infrastructure design. Globally consistent responsibility.",
+  },
+  {
+    name: "Post-Quantum Cryptography",
+    percentage: 18,
+    naPercentage: 23,
+    gap: -5,
+    fill: "#f2e063",
+    description: "Quantum-resistant cryptography and post-quantum migration planning. Higher NA adoption.",
+  },
+  {
+    name: "AI Safety & Reliability",
+    percentage: 15,
+    naPercentage: 32,
+    gap: -17,
+    fill: "#b3b3e6",
+    description: "AI system safety and reliability engineering. NA leads due to larger AI development footprint.",
+  },
+  {
+    name: "AI Ethics",
+    percentage: 15,
+    naPercentage: 30,
+    gap: -15,
+    fill: "#a8d4e0",
+    description: "AI ethics frameworks and responsible AI governance. NA more mature in AI ethics programs.",
+  },
+  {
+    name: "Fraud",
+    percentage: 10,
+    naPercentage: 18,
+    gap: -8,
+    fill: "#63a3a8",
+    description: "Fraud detection and prevention programs. Often separate from CISO in international markets.",
+  },
+  {
+    name: "Other",
+    percentage: 5,
+    naPercentage: 7,
+    gap: -2,
+    fill: "#b8b8b8",
+    description: "Other specialized security functions and emerging responsibilities.",
+  },
 ];
 
 interface CustomTooltipProps {
@@ -206,12 +262,12 @@ export function InternationalResponsibilitiesChart({ className }: { className?: 
           Functions Under International CISO Direct Responsibility
         </h4>
         <p className="text-xs text-muted-foreground/70">
-          Top 15 functions showing regulatory-driven priorities: TPRM (85%), Privacy (73%)
+          All 22 functions showing regulatory-driven priorities: TPRM (85%), Privacy (73%)
         </p>
       </div>
 
       {/* Horizontal Bar Chart */}
-      <div className="h-[600px] w-full">
+      <div className="h-[700px] md:h-[880px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={responsibilitiesData}
@@ -242,7 +298,7 @@ export function InternationalResponsibilitiesChart({ className }: { className?: 
               animationBegin={0}
               animationDuration={animationDuration}
               animationEasing="ease-out"
-              maxBarSize={20}
+              maxBarSize={18}
               radius={[0, 4, 4, 0]}
             >
               {responsibilitiesData.map((entry, index) => (
