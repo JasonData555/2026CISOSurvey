@@ -41,7 +41,7 @@ export default function CISOReport2026() {
         <SectionHeader
           eyebrow="2026 Global CISO Report"
           title="Introduction & Methodology"
-          description="Now in its eighth annual edition, this report analyzes the evolving landscape of security leadership through compensation trends, reporting structures, and expanding responsibilities of CISOs and NextGen leaders."
+          description="Now in its ninth annual edition, this report analyzes the evolving landscape of security leadership through compensation trends, reporting structures, and expanding responsibilities of CISOs and NextGen leaders."
         />
 
         <ContentRow className="mb-16">

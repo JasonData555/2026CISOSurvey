@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
@@ -46,6 +47,18 @@ export function HeroSection() {
                 : "opacity-0 translate-y-8"
           )}
         >
+          {/* Logo - Primary brand mark */}
+          <div className="mb-6 md:mb-8">
+            <Image
+              src="/hitch-partners-logo.png"
+              alt="Hitch Partners"
+              height={48}
+              width={163}
+              className="h-8 md:h-10 lg:h-12 w-auto brightness-0 invert"
+              priority
+            />
+          </div>
+
           {/* Eyebrow */}
           <p className="text-xs md:text-sm font-medium uppercase tracking-[0.2em] text-white/70 mb-6">
             Global Security Leadership Analysis
@@ -60,7 +73,7 @@ export function HeroSection() {
 
           {/* Subtitle */}
           <p className="text-lg md:text-xl text-white/80 max-w-2xl leading-relaxed mb-12">
-            Executive analysis of compensation, reporting structures, AI governance, 
+            Executive analysis of compensation, reporting structures, AI governance,
             and strategic priorities across 625+ security leaders.
           </p>
         </div>

@@ -72,7 +72,7 @@ export function Navigation() {
       aria-label="Main navigation"
     >
       <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="flex items-center justify-end h-16">
+        <div className="flex items-center justify-between h-16">
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1" role="list">
             {navItems.map((item) => (
@@ -98,7 +98,7 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - RIGHT SIDE */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={cn(
