@@ -1,210 +1,331 @@
 "use client";
 
-import React from "react"
-
-import { useState, useEffect, useRef } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { cn } from "@/lib/utils";
-import { Shield, Cloud, Code, FileCheck, Users, Fingerprint } from "lucide-react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  ReferenceDot,
+} from "recharts";
+import { Slider } from "@/components/ui/slider";
+import { Users } from "lucide-react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
-interface FunctionData {
-  name: string;
+interface TeamSizeData {
+  companySize: string;
+  employees: string;
   teamSize: number;
-  icon: React.ComponentType<{ className?: string }>;
-  description: string;
-  category: "technical" | "operational";
+  index: number;
 }
 
-const nextGenFunctions: FunctionData[] = [
+const teamSizeByCompanyData: TeamSizeData[] = [
   {
-    name: "Security Operations",
-    teamSize: 35,
-    icon: Shield,
-    description: "SOC, incident response, and threat hunting",
-    category: "operational",
+    companySize: "<500",
+    employees: "Under 500",
+    teamSize: 6,
+    index: 0,
   },
   {
-    name: "GRC",
-    teamSize: 28,
-    icon: FileCheck,
-    description: "Governance, risk management, and compliance",
-    category: "operational",
+    companySize: "500-999",
+    employees: "500-999",
+    teamSize: 5,
+    index: 1,
   },
   {
-    name: "Identity & Access",
+    companySize: "1K-5K",
+    employees: "1,000-4,999",
     teamSize: 22,
-    icon: Fingerprint,
-    description: "IAM, PAM, and identity governance",
-    category: "technical",
+    index: 2,
   },
   {
-    name: "Cloud Security",
-    teamSize: 18,
-    icon: Cloud,
-    description: "Cloud infrastructure and workload protection",
-    category: "technical",
+    companySize: "5K-10K",
+    employees: "5,000-9,999",
+    teamSize: 49,
+    index: 3,
   },
   {
-    name: "Security Engineering",
-    teamSize: 15,
-    icon: Code,
-    description: "Security tooling and automation",
-    category: "technical",
-  },
-  {
-    name: "AppSec",
-    teamSize: 12,
-    icon: Code,
-    description: "Application security and secure development",
-    category: "technical",
+    companySize: "10K+",
+    employees: "10,000+",
+    teamSize: 72,
+    index: 4,
   },
 ];
 
-export function NextGenTeamSizeChart({ className }: { className?: string }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = useReducedMotion();
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: Array<{
+    payload: TeamSizeData;
+  }>;
+}
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.4 }
-    );
+function CustomTooltip({ active, payload }: CustomTooltipProps) {
+  if (!active || !payload?.length) return null;
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const maxTeamSize = Math.max(...nextGenFunctions.map((f) => f.teamSize));
+  const data = payload[0].payload;
 
   return (
-    <div ref={containerRef} className={cn("w-full", className)}>
-      {/* Category Legend */}
-      <div className="flex items-center gap-6 mb-6">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-primary" />
-          <span className="text-xs text-muted-foreground">Technical Functions</span>
+    <div className="bg-card border border-border p-4 shadow-lg min-w-[200px]">
+      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
+        {data.employees} Employees
+      </p>
+      <p className="text-2xl font-bold text-primary">{data.teamSize}</p>
+      <p className="text-sm text-muted-foreground">avg direct reports</p>
+    </div>
+  );
+}
+
+interface DetailsCardProps {
+  data: TeamSizeData;
+  isActive: boolean;
+  prefersReducedMotion: boolean;
+}
+
+function DetailsCard({ data, isActive, prefersReducedMotion }: DetailsCardProps) {
+  return (
+    <div
+      className={cn(
+        "transition-all ease-out",
+        prefersReducedMotion ? "duration-0" : "duration-500",
+        isActive
+          ? "opacity-100 translate-y-0"
+          : prefersReducedMotion
+            ? "opacity-100 translate-y-0 pointer-events-none absolute"
+            : "opacity-0 translate-y-4 pointer-events-none absolute"
+      )}
+    >
+      {isActive && (
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 flex items-center justify-center bg-muted text-foreground">
+              <Users className="w-6 h-6" />
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                {data.employees} Employees
+              </p>
+              <h4 className="text-xl font-bold text-foreground">
+                Company Size: {data.companySize}
+              </h4>
+            </div>
+          </div>
+
+          <div className="flex items-baseline gap-2">
+            <span className="text-5xl font-bold tracking-tight text-primary">
+              {data.teamSize}
+            </span>
+            <span className="text-lg text-muted-foreground font-medium">
+              avg. direct reports
+            </span>
+          </div>
+
+          <p className="text-muted-foreground leading-relaxed max-w-md">
+            {data.index === 4
+              ? "At enterprise scale, NextGen security leaders manage the largest teams, reflecting mature security programs with specialized roles."
+              : data.index === 0
+                ? "Startup-stage security leaders manage lean teams, often wearing multiple hats and focusing on foundational security."
+                : "Team sizes scale with organizational complexity as security programs mature and specialize."}
+          </p>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-[#737373]" />
-          <span className="text-xs text-muted-foreground">Operational Functions</span>
+      )}
+    </div>
+  );
+}
+
+export function NextGenTeamSizeChart({ className }: { className?: string }) {
+  const [activeIndex, setActiveIndex] = useState(4); // Start at largest company size
+  const prefersReducedMotion = useReducedMotion();
+
+  const activeData = useMemo(() => teamSizeByCompanyData[activeIndex], [activeIndex]);
+
+  const handleSliderChange = useCallback((value: number[]) => {
+    setActiveIndex(value[0]);
+  }, []);
+
+  return (
+    <div className={cn("space-y-8", className)}>
+      {/* Main Chart Area */}
+      <div className="relative">
+        <div className="h-80 md:h-96">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart
+              data={teamSizeByCompanyData}
+              margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
+            >
+              <defs>
+                <linearGradient id="nextGenTeamSizeGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#003087" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#003087" stopOpacity={0.05} />
+                </linearGradient>
+              </defs>
+
+              <XAxis
+                dataKey="companySize"
+                tick={{ fill: "#525252", fontSize: 12, fontWeight: 500 }}
+                axisLine={{ stroke: "#e5e5e5" }}
+                tickLine={{ stroke: "#e5e5e5" }}
+              />
+
+              <YAxis
+                tick={{ fill: "#525252", fontSize: 12 }}
+                axisLine={{ stroke: "#e5e5e5" }}
+                tickLine={{ stroke: "#e5e5e5" }}
+                domain={[0, 80]}
+                ticks={[0, 20, 40, 60, 80]}
+              />
+
+              <Tooltip
+                content={<CustomTooltip />}
+                cursor={{ stroke: "#003087", strokeWidth: 1, strokeDasharray: "4 4" }}
+              />
+
+              <Line
+                type="monotone"
+                dataKey="teamSize"
+                stroke="#003087"
+                strokeWidth={3}
+                dot={{ fill: "#ffffff", stroke: "#003087", strokeWidth: 2, r: 6 }}
+                activeDot={{ fill: "#003087", stroke: "#ffffff", strokeWidth: 3, r: 8 }}
+                animationDuration={prefersReducedMotion ? 0 : 1000}
+              />
+
+              {/* Highlight active point */}
+              <ReferenceDot
+                x={activeData.companySize}
+                y={activeData.teamSize}
+                r={8}
+                fill="#003087"
+                stroke="#ffffff"
+                strokeWidth={3}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Y-axis label */}
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 origin-center">
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground whitespace-nowrap">
+            Avg. Team Size
+          </span>
         </div>
       </div>
 
-      {/* Team Size Cards Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {nextGenFunctions.map((func, index) => {
-          const Icon = func.icon;
-          const isHovered = hoveredIndex === index;
-          const barWidth = (func.teamSize / maxTeamSize) * 100;
+      {/* Interactive Slider */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between text-sm">
+          <span className="font-medium text-muted-foreground">Company Size</span>
+          <span className="text-xs text-muted-foreground">Drag to explore team scaling</span>
+        </div>
 
-          return (
-            <div
-              key={func.name}
+        <Slider
+          value={[activeIndex]}
+          onValueChange={handleSliderChange}
+          max={4}
+          min={0}
+          step={1}
+          className="cursor-pointer"
+          aria-label={`Company size selector. Current selection: ${activeData.employees} employees, ${activeData.teamSize} direct reports. Use arrow keys to navigate.`}
+        />
+
+        {/* Phase labels under slider */}
+        <div className="flex justify-between text-xs text-muted-foreground">
+          {teamSizeByCompanyData.map((data, i) => (
+            <button
+              key={data.companySize}
+              onClick={() => setActiveIndex(i)}
               className={cn(
-                "bg-card border border-border shadow-sm p-4 transition-all cursor-pointer",
-                prefersReducedMotion ? "duration-0" : "duration-300",
-                isHovered && "border-primary shadow-md"
+                "transition-colors cursor-pointer px-1 py-0.5 -mx-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded",
+                i === activeIndex
+                  ? "text-primary font-semibold"
+                  : "hover:text-foreground"
               )}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              style={{
-                opacity: isVisible ? 1 : prefersReducedMotion ? 1 : 0,
-                transform: isVisible || prefersReducedMotion ? "translateY(0)" : "translateY(20px)",
-                transition: prefersReducedMotion
-                  ? "none"
-                  : `opacity 0.5s ease ${index * 80}ms, transform 0.5s ease ${index * 80}ms`,
-              }}
+              aria-label={`${data.employees} employees, ${data.teamSize} direct reports`}
+              aria-pressed={i === activeIndex}
             >
-              <div className="flex items-start gap-3">
-                <div
+              {data.companySize}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Details Card */}
+      <div className="border border-border bg-card p-6 min-h-[180px] relative overflow-hidden">
+        {teamSizeByCompanyData.map((data, i) => (
+          <DetailsCard
+            key={data.companySize}
+            data={data}
+            isActive={i === activeIndex}
+            prefersReducedMotion={prefersReducedMotion}
+          />
+        ))}
+      </div>
+
+      {/* Phase Timeline (Desktop) */}
+      <div className="hidden md:block">
+        <div className="flex items-stretch">
+          {teamSizeByCompanyData.map((data, i) => {
+            const isActive = i === activeIndex;
+            const isPeak = i === 4; // 10K+ is the peak
+
+            return (
+              <button
+                key={data.companySize}
+                onClick={() => setActiveIndex(i)}
+                className={cn(
+                  "flex-1 p-4 border transition-all cursor-pointer text-left group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset",
+                  isActive
+                    ? isPeak
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-accent border-primary"
+                    : "border-border hover:border-muted-foreground/30 bg-card",
+                  i > 0 && "-ml-px"
+                )}
+                aria-label={`${data.employees} employees, ${data.teamSize} direct reports`}
+                aria-pressed={isActive}
+              >
+                <p
                   className={cn(
-                    "w-10 h-10 flex items-center justify-center transition-colors",
-                    func.category === "technical" ? "bg-primary/10" : "bg-[#737373]/10"
+                    "text-xs font-semibold uppercase tracking-wider mb-1",
+                    isActive
+                      ? isPeak
+                        ? "text-primary-foreground/70"
+                        : "text-primary/70"
+                      : "text-muted-foreground"
                   )}
                 >
-                  <Icon
-                    className={cn(
-                      "w-5 h-5 transition-colors",
-                      func.category === "technical" ? "text-primary" : "text-[#737373]"
-                    )}
-                  />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-foreground truncate">{func.name}</p>
-                  <p
-                    className={cn(
-                      "text-2xl font-bold mt-1",
-                      func.category === "technical" ? "text-primary" : "text-[#737373]"
-                    )}
-                  >
-                    {func.teamSize}
-                  </p>
-                  <p className="text-xs text-muted-foreground">avg direct reports</p>
-                </div>
-              </div>
-
-              {/* Progress bar */}
-              <div className="h-1 bg-muted mt-3 overflow-hidden">
-                <div
+                  {data.companySize}
+                </p>
+                <p
                   className={cn(
-                    "h-full transition-all ease-out",
-                    prefersReducedMotion ? "duration-0" : "duration-1000",
-                    func.category === "technical" ? "bg-primary" : "bg-[#737373]"
+                    "text-2xl font-bold",
+                    isActive
+                      ? isPeak
+                        ? "text-primary-foreground"
+                        : "text-primary"
+                      : "text-foreground group-hover:text-primary transition-colors"
                   )}
-                  style={{
-                    width: isVisible ? `${barWidth}%` : "0%",
-                    transitionDelay: prefersReducedMotion ? "0ms" : `${index * 100 + 300}ms`,
-                  }}
-                />
-              </div>
-
-              {/* Description on hover */}
-              <div
-                className={cn(
-                  "overflow-hidden transition-all",
-                  prefersReducedMotion ? "duration-0" : "duration-300",
-                  isHovered ? "max-h-12 mt-3 opacity-100" : "max-h-0 opacity-0"
-                )}
-              >
-                <p className="text-xs text-muted-foreground">{func.description}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Summary Row */}
-      <div className="mt-8 grid grid-cols-3 gap-4 pt-6 border-t border-border">
-        <div className="text-center">
-          <p className="text-3xl font-bold text-primary">12-35</p>
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Direct Report Range</p>
+                >
+                  {data.teamSize}
+                </p>
+                <p
+                  className={cn(
+                    "text-xs mt-1 line-clamp-1",
+                    isActive
+                      ? isPeak
+                        ? "text-primary-foreground/80"
+                        : "text-foreground"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {data.employees}
+                </p>
+              </button>
+            );
+          })}
         </div>
-        <div className="text-center">
-          <p className="text-3xl font-bold text-foreground">22</p>
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Average Team Size</p>
-        </div>
-        <div className="text-center">
-          <p className="text-3xl font-bold text-[#737373]">35</p>
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Max (SecOps)</p>
-        </div>
-      </div>
-
-      {/* Key Insight */}
-      <div className="mt-6 border-l-4 border-primary bg-accent p-4">
-        <p className="text-sm text-foreground font-medium">
-          <span className="font-bold text-primary">Security Operations</span> leaders manage the largest teams at 35 
-          direct reports, while <span className="font-bold text-primary">AppSec</span> and technical functions 
-          maintain lean, highly specialized teams averaging 12-18 personnel.
-        </p>
       </div>
     </div>
   );
