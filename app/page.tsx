@@ -166,14 +166,14 @@ export default function CISOReport2026() {
           <PrimaryColumn>
             <SubsectionHeader
               title="Industry Compensation Leaders"
-              description="Cash-only compensation varies significantly by industry vertical."
+              description="Total compensation varies significantly by industry vertical."
             />
             <IndustryCompensationChart />
           </PrimaryColumn>
           <SidebarColumn>
             <CalloutBox variant="insight">
-              Technology and financial services lead in cash compensation, 
-              reflecting the competitive talent market in these sectors.
+              Consumer-facing software and media industries lead in total compensation,
+              with equity packages accounting for up to 49% of total comp in top sectors.
             </CalloutBox>
           </SidebarColumn>
         </ContentRow>
