@@ -264,7 +264,7 @@ export default function CISOReport2026() {
         <ContentRow className="mb-16">
           <PrimaryColumn>
             <SubsectionHeader
-              title="Public vs. Private Company Compensation"
+              title="Public vs. Private Company CISO Compensation"
               description="Total compensation breakdown reveals structural differences in how organizations value security leadership."
             />
             <CompensationComparisonChart />

@@ -57,6 +57,22 @@ const formatFullCurrency = (value: number) => {
   }).format(value);
 };
 
+// YoY change data for Total Comp only
+const yoyData: Record<string, { public: number; private: number }> = {
+  "Total Comp": { public: 5, private: 6 },
+};
+
+const getYoYColor = (value: number): string => {
+  if (value > 0) return "text-[#059669]";
+  if (value < 0) return "text-[#c41e3a]";
+  return "text-[#737373]";
+};
+
+const formatYoY = (value: number): string => {
+  const prefix = value > 0 ? "+" : "";
+  return `${prefix}${value}% YoY`;
+};
+
 interface CustomTooltipProps {
   active?: boolean;
   payload?: Array<{
@@ -86,14 +102,28 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
             <div className="w-3 h-3 bg-[#003087]" />
             <span className="text-xs text-muted-foreground">Public</span>
           </div>
-          <span className="font-mono font-bold text-foreground text-sm">{formatFullCurrency(publicVal)}</span>
+          <div className="flex items-center gap-2">
+            <span className="font-mono font-bold text-foreground text-sm">{formatFullCurrency(publicVal)}</span>
+            {label === "Total Comp" && yoyData[label] && (
+              <span className={cn("text-xs font-medium whitespace-nowrap", getYoYColor(yoyData[label].public))}>
+                {formatYoY(yoyData[label].public)}
+              </span>
+            )}
+          </div>
         </div>
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-[#737373]" />
             <span className="text-xs text-muted-foreground">Private</span>
           </div>
-          <span className="font-mono font-bold text-foreground text-sm">{formatFullCurrency(privateVal)}</span>
+          <div className="flex items-center gap-2">
+            <span className="font-mono font-bold text-foreground text-sm">{formatFullCurrency(privateVal)}</span>
+            {label === "Total Comp" && yoyData[label] && (
+              <span className={cn("text-xs font-medium whitespace-nowrap", getYoYColor(yoyData[label].private))}>
+                {formatYoY(yoyData[label].private)}
+              </span>
+            )}
+          </div>
         </div>
       </div>
       <div className="mt-3 pt-3 border-t border-border">

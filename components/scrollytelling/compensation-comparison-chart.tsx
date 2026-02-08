@@ -77,6 +77,11 @@ const genderPayGapData = [
 
 type ViewMode = "compensation" | "gender";
 
+// YoY change data for Total Comp only
+const yoyData: Record<string, { public: number; private: number }> = {
+  "Total Comp": { public: 0, private: 4 },
+};
+
 const formatCurrency = (value: number) => {
   if (value >= 1000000) {
     return `$${(value / 1000000).toFixed(1)}M`;
@@ -90,6 +95,17 @@ const formatFullCurrency = (value: number) => {
     currency: "USD",
     maximumFractionDigits: 0,
   }).format(value);
+};
+
+const getYoYColor = (value: number): string => {
+  if (value > 0) return "text-[#059669]";
+  if (value < 0) return "text-[#c41e3a]";
+  return "text-[#737373]";
+};
+
+const formatYoY = (value: number): string => {
+  const prefix = value > 0 ? "+" : "";
+  return `${prefix}${value}% YoY`;
 };
 
 interface CustomTooltipProps {
@@ -147,22 +163,39 @@ function CustomTooltip({ active, payload, label, viewMode }: CustomTooltipProps)
         {label}
       </p>
       <div className="space-y-2">
-        {payload.map((entry, index) => (
-          <div key={index} className="flex justify-between items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div
-                className="w-3 h-3"
-                style={{ backgroundColor: entry.fill }}
-              />
-              <span className="text-xs text-muted-foreground">
-                {getLabelName(entry.dataKey)}
-              </span>
+        {payload.map((entry, index) => {
+          // Only show YoY for Total Comp in compensation view
+          const showYoY = viewMode === "compensation" && label === "Total Comp";
+          const isPublic = entry.dataKey === "public";
+          const isPrivate = entry.dataKey === "private";
+          const entryYoY = showYoY && label && yoyData[label]
+            ? (isPublic ? yoyData[label].public : isPrivate ? yoyData[label].private : null)
+            : null;
+
+          return (
+            <div key={index} className="flex justify-between items-center gap-4">
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-3 h-3"
+                  style={{ backgroundColor: entry.fill }}
+                />
+                <span className="text-xs text-muted-foreground">
+                  {getLabelName(entry.dataKey)}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-sm font-medium text-foreground">
+                  {formatFullCurrency(entry.value)}
+                </span>
+                {entryYoY !== null && (
+                  <span className={cn("text-xs font-medium whitespace-nowrap", getYoYColor(entryYoY))}>
+                    {formatYoY(entryYoY)}
+                  </span>
+                )}
+              </div>
             </div>
-            <span className="font-mono text-sm font-medium text-foreground">
-              {formatFullCurrency(entry.value)}
-            </span>
-          </div>
-        ))}
+          );
+        })}
       </div>
       {gap && viewMode === "compensation" && "value" in gap && (
         <div className="mt-3 pt-3 border-t border-border">
