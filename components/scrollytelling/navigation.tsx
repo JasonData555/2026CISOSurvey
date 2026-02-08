@@ -15,6 +15,7 @@ const navItems: NavItem[] = [
   { id: "executive-summary", label: "Summary" },
   { id: "compensation", label: "Compensation" },
   { id: "reporting-structure", label: "Reporting" },
+  { id: "liability-protection", label: "Liability" },
   { id: "team-dynamics", label: "Teams" },
   { id: "functional-responsibilities", label: "Responsibilities" },
   { id: "ai-governance", label: "AI" },

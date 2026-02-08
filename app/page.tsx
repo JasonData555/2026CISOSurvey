@@ -29,6 +29,8 @@ import { FunctionalResponsibilitiesChart } from "@/components/scrollytelling/fun
 import { InternationalCompensationChart } from "@/components/scrollytelling/international-compensation-chart";
 import { InternationalTeamSizeChart } from "@/components/scrollytelling/international-team-size-chart";
 import { InternationalResponsibilitiesChart } from "@/components/scrollytelling/international-responsibilities-chart";
+import { ExecutiveLiabilityChart } from "@/components/scrollytelling/executive-liability-chart";
+import { PersonalLiabilityChart } from "@/components/scrollytelling/personal-liability-chart";
 
 export default function CISOReport2026() {
   return (
@@ -363,10 +365,50 @@ export default function CISOReport2026() {
         </ContentRow>
       </SectionWrapper>
 
-      {/* Team Dynamics Section */}
-      <SectionWrapper id="team-dynamics" variant="muted">
+      {/* CISO Liability Protection Section */}
+      <SectionWrapper id="liability-protection" variant="muted">
         <SectionHeader
           eyebrow="Section 03"
+          title="CISO Liability Protection"
+          description="Security leaders face significant personal risk with inadequate executive and personal liability coverage across both public and private sectors."
+        />
+
+        <ContentRow className="mb-16">
+          <PrimaryColumn>
+            <SubsectionHeader
+              title="Executive Liability Coverage"
+              description="D&O and indemnification policy adoption by company structure."
+            />
+            <ExecutiveLiabilityChart />
+          </PrimaryColumn>
+          <SidebarColumn>
+            <MetricCard value="36%" label="Private CISOs unprotected" sentiment="bad" />
+            <MetricCard value="20%" label="Public CISOs unprotected" sentiment="warning" />
+            <CalloutBox variant="insight">
+              Executive Liability Protection Gap: 36% of private and 20% of public CISOs lack coverage. S&P 500 executive protection benefits rose from 12% to 22.5% (2020–2024), per ISS-Corporate data reported by the Financial Times.
+            </CalloutBox>
+          </SidebarColumn>
+        </ContentRow>
+
+        <ContentRow>
+          <PrimaryColumn>
+            <SubsectionHeader
+              title="Personal Liability Insurance"
+              description="Individual coverage rates reveal a widespread protection gap."
+            />
+            <PersonalLiabilityChart />
+          </PrimaryColumn>
+          <SidebarColumn>
+            <MetricCard value="~75%" label="Lack personal coverage" sentiment="bad" />
+            <MetricCard value="<2%" label="Difference between sectors" sentiment="neutral" />
+          </SidebarColumn>
+        </ContentRow>
+      </SectionWrapper>
+
+      {/* Team Dynamics Section */}
+      <SectionWrapper id="team-dynamics">
+        <SectionHeader
+          eyebrow="Section 04"
           title="Team Size Dynamics"
           description="Security team scaling follows a non-linear trajectory that peaks at upper mid-market scale before federation begins."
         />
@@ -401,7 +443,7 @@ export default function CISOReport2026() {
       {/* CISO Functional Responsibilities Section */}
       <SectionWrapper id="functional-responsibilities">
         <SectionHeader
-          eyebrow="Section 04"
+          eyebrow="Section 05"
           title="CISO Functional Responsibilities"
           description="Security leadership encompasses a diverse portfolio of direct responsibilities from universal operational functions to emerging AI governance revealing where accountability is concentrated and where critical gaps persist."
         />
@@ -449,7 +491,7 @@ export default function CISOReport2026() {
       {/* AI Governance Section */}
       <SectionWrapper id="ai-governance">
         <SectionHeader
-          eyebrow="Section 05"
+          eyebrow="Section 06"
           title="AI Governance and Risk Management Maturity"
           description="Organizations face a critical gap between AI adoption velocity and security preparedness, with structural vulnerabilities across governance, technical capability, and executive protection."
         />
@@ -512,7 +554,7 @@ export default function CISOReport2026() {
       {/* Threat Landscape Section */}
       <SectionWrapper id="threat-landscape" variant="muted">
         <SectionHeader
-          eyebrow="Section 06"
+          eyebrow="Section 07"
           title="Threat Landscape 2026"
           description="Third-party risk dominates security priorities, with AI-enhanced attacks and cloud misconfigurations completing the top three concerns."
         />
@@ -553,7 +595,7 @@ export default function CISOReport2026() {
       {/* NextGen Leaders Section */}
       <SectionWrapper id="nextgen-leaders">
         <SectionHeader
-          eyebrow="Section 07"
+          eyebrow="Section 08"
           title="NextGen Security Leaders"
           description="Deputy CISOs, Heads of Security Engineering, and domain-specific Directors represent the execution layer bridging strategy with hands-on program delivery."
         />
@@ -621,7 +663,7 @@ export default function CISOReport2026() {
       {/* International CISO Section */}
       <SectionWrapper id="international" variant="default">
         <SectionHeader
-          eyebrow="Section 07.5"
+          eyebrow="Section 08.5"
           title="International CISO Landscape"
           description="European and international CISOs operate in distinctly different contexts; 32% lower compensation, broader regulatory responsibilities, and unique team scaling patterns shaped by GDPR and centralized governance models."
         />
@@ -714,7 +756,7 @@ export default function CISOReport2026() {
       {/* Strategic Recommendations Section */}
       <SectionWrapper id="recommendations" variant="muted">
         <SectionHeader
-          eyebrow="Section 08"
+          eyebrow="Section 09"
           title="Strategic Imperatives for 2026"
           description="Six critical actions for security leaders navigating compensation, governance, and organizational challenges. Click any imperative to explore implementation details and related data points."
         />
