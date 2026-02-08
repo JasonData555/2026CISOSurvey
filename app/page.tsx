@@ -94,6 +94,117 @@ export default function CISOReport2026() {
           </PrimaryColumn>
         </ContentRow>
 
+        <ContentRow className="mb-16">
+          <PrimaryColumn>
+            <SubsectionHeader title="Scope & Definitions" />
+            <div className="space-y-6">
+              <div>
+                <p className="text-muted-foreground leading-relaxed">
+                  <strong>"CISO" Definition:</strong> Throughout this report, CISO refers to the most senior security leader accountable for an organization's information security strategy, program execution, and risk management. This encompasses multiple titles, including:
+                </p>
+                <ul className="mt-4 space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Chief Information Security Officer (CISO)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Chief Security Officer (CSO)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Head of Security / Head of Information Security</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Vice President of Security / VP of Information Security</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Senior Director of Security (when serving as top security role)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <p className="text-muted-foreground leading-relaxed">
+                  <strong>"NextGen" Definition:</strong> "NextGen" refers to the security leadership layer directly reporting to the CISO—typically the top 3-5 security leaders responsible for executing the security program across specialized domains. These roles represent the next generation of CISO talent and include titles such as:
+                </p>
+                <ul className="mt-4 space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Deputy CISO</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Head of Security / Security Engineering</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Vice President of Product Security / Application Security</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Senior Director / Director of Security (domain-specific: Cloud, Identity, GRC, etc.)</span>
+                  </li>
+                </ul>
+                <p className="mt-4 text-muted-foreground leading-relaxed">
+                  NextGen leaders translate CISO strategy into operational execution, combining strategic alignment with hands-on program leadership. They typically manage teams of 5 to 50+ security professionals within their areas of specialization.
+                </p>
+              </div>
+            </div>
+          </PrimaryColumn>
+        </ContentRow>
+
+        <ContentRow className="mb-16">
+          <PrimaryColumn>
+            <SubsectionHeader title="Geographic Segments" />
+            <div className="space-y-6">
+              <p className="text-muted-foreground leading-relaxed">
+                This report highlights the North American security leadership market, a space Hitch Partners has supported through security leadership searches for more than a decade. With respondents based in the U.S. and Canada, the dataset offers a robust regional view of compensation benchmarks, organizational structures, and evolving security priorities.
+              </p>
+
+              <div>
+                <p className="text-muted-foreground leading-relaxed">
+                  <strong>Expanding Global Coverage:</strong> Beginning in 2025, we expanded our data collection beyond North America to include European and broader international markets to establish baseline benchmarks and better understand regional differences in security leadership practices. While international respondents currently account for a significantly lower percentage of total responses, we are committed to increasing global representation in future editions.
+                </p>
+              </div>
+
+              <div>
+                <p className="text-muted-foreground leading-relaxed">
+                  <strong>Current International Representation:</strong>
+                </p>
+                <ul className="mt-4 space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>European Union: Concentrated in Germany, France, and the Netherlands</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>United Kingdom: London, other major business centers</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Scandinavia: Norway, Sweden, Denmark</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Middle East: UAE, Saudi Arabia, and Israel</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Australia: Sydney and Melbourne metro areas</span>
+                  </li>
+                </ul>
+              </div>
+
+              <p className="text-muted-foreground leading-relaxed">
+                As the international dataset matures over the next 12–24 months, we will introduce deeper regional analysis, including market-specific compensation benchmarks, regulatory drivers (such as GDPR, NIS2, and DORA), and structural differences in security organizations. In this year's edition, international findings are presented alongside North American data where sample sizes support statistically meaningful comparisons. All international compensation figures have been converted to USD using exchange rates as of January 11, 2026, to ensure direct comparability.
+              </p>
+            </div>
+          </PrimaryColumn>
+        </ContentRow>
+
         <ContentRow>
           <PrimaryColumn>
             <SubsectionHeader
