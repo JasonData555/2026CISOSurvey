@@ -8,7 +8,7 @@ import {
 } from "@/components/scrollytelling/section-wrapper";
 import { SectionHeader, SubsectionHeader } from "@/components/scrollytelling/section-header";
 import { MetricCard, StatGrid } from "@/components/scrollytelling/metric-card";
-import { CalloutBox, KeyTakeaways } from "@/components/scrollytelling/callout-box";
+import { CalloutBox } from "@/components/scrollytelling/callout-box";
 import { CompensationComparisonChart } from "@/components/scrollytelling/compensation-comparison-chart";
 import { ReportingStructureSankeyChart } from "@/components/scrollytelling/reporting-structure-sankey";
 import { AIGovernanceChallengesChart } from "@/components/scrollytelling/ai-governance-challenges-chart";
@@ -34,6 +34,7 @@ import { ExecutiveLiabilityChart } from "@/components/scrollytelling/executive-l
 import { PersonalLiabilityChart } from "@/components/scrollytelling/personal-liability-chart";
 import { AIGovernanceChallengesByCompanyChart } from "@/components/scrollytelling/ai-governance-challenges-by-company-chart";
 import { AIConcernsByCompanyChart } from "@/components/scrollytelling/ai-concerns-by-company-chart";
+import { AIGovernanceFrameworksChart } from "@/components/scrollytelling/ai-governance-frameworks-chart";
 
 export default function CISOReport2026() {
   return (
@@ -581,14 +582,17 @@ export default function CISOReport2026() {
           </SidebarColumn>
         </ContentRow>
 
-        <KeyTakeaways
-          items={[
-            "95%+ AI governance immaturity (calculated from lack of dedicated leaders + low confidence)",
-            "36% private CISOs have NO executive liability protection",
-            "85% lack technical assessment confidence",
-            "Shadow AI + accountability = 48% of top governance challenges",
-          ]}
-        />
+        <ContentRow className="mb-16">
+          <PrimaryColumn>
+            <AIGovernanceFrameworksChart />
+          </PrimaryColumn>
+          <SidebarColumn>
+            <MetricCard value="67%" label="Public Companies Using NIST AI RMF" sentiment="good" />
+            <CalloutBox variant="insight">
+              NIST AI Framework established as clear market preference over alternatives, 3x more likely.
+            </CalloutBox>
+          </SidebarColumn>
+        </ContentRow>
       </SectionWrapper>
 
       {/* Threat Landscape Section */}
@@ -768,29 +772,6 @@ export default function CISOReport2026() {
             <MetricCard value="10" label="Avg Functions Per CISO" sentiment="neutral" />
           </SidebarColumn>
         </ContentRow>
-
-        {/* Key Takeaways */}
-        <div className="mt-16 border-l-4 border-l-primary bg-accent p-6">
-          <h3 className="text-lg font-semibold text-foreground mb-4">Key Takeaways</h3>
-          <ul className="space-y-3 text-sm text-foreground">
-            <li className="flex gap-3">
-              <span className="text-primary font-bold">1.</span>
-              <span>32% compensation gap driven by equity differences ($152K vs $265K) and regional market dynamics</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-primary font-bold">2.</span>
-              <span>TPRM ownership 85% vs 41% in North America—reflecting GDPR, NIS2, and DORA regulatory emphasis</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-primary font-bold">3.</span>
-              <span>Privacy ownership 73% vs 58%—centralized compliance models dominant in international markets</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-primary font-bold">4.</span>
-              <span>16% larger enterprise teams (150 vs 129) at 10K+ scale suggest less security federation internationally</span>
-            </li>
-          </ul>
-        </div>
       </SectionWrapper>
 
       {/* Strategic Recommendations Section */}
