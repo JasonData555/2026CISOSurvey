@@ -22,6 +22,7 @@ import { TeamSizeScalingCurve } from "@/components/scrollytelling/team-size-scal
 import { NextGenVsCISOCompensationChart } from "@/components/scrollytelling/nextgen-vs-ciso-compensation-chart";
 import { StrategicImperativesRoadmap } from "@/components/scrollytelling/strategic-imperatives-roadmap";
 import { IndustryCompensationChart } from "@/components/scrollytelling/industry-compensation-chart";
+import { GeographicCompensationChart } from "@/components/scrollytelling/geographic-compensation-chart";
 import { SigningBonusChart } from "@/components/scrollytelling/signing-bonus-chart";
 import { BudgetJustificationChart } from "@/components/scrollytelling/budget-justification-chart";
 import { NextGenTeamSizeChart } from "@/components/scrollytelling/nextgen-team-size-chart";
@@ -31,6 +32,8 @@ import { InternationalTeamSizeChart } from "@/components/scrollytelling/internat
 import { InternationalResponsibilitiesChart } from "@/components/scrollytelling/international-responsibilities-chart";
 import { ExecutiveLiabilityChart } from "@/components/scrollytelling/executive-liability-chart";
 import { PersonalLiabilityChart } from "@/components/scrollytelling/personal-liability-chart";
+import { AIGovernanceChallengesByCompanyChart } from "@/components/scrollytelling/ai-governance-challenges-by-company-chart";
+import { AIConcernsByCompanyChart } from "@/components/scrollytelling/ai-concerns-by-company-chart";
 
 export default function CISOReport2026() {
   return (
@@ -291,6 +294,21 @@ export default function CISOReport2026() {
           </SidebarColumn>
         </ContentRow>
 
+        <ContentRow className="mb-16">
+          <PrimaryColumn>
+            <SubsectionHeader
+              title="Geographic Insights"
+              description="Location Premiums Persist Despite Remote Work Expansion"
+            />
+            <GeographicCompensationChart />
+          </PrimaryColumn>
+          <SidebarColumn>
+            <CalloutBox variant="insight">
+              Compensation differences by location remain significant — with a 2.4× spread between top-paying markets such as Seattle and lower-cost metros like Kansas City.
+            </CalloutBox>
+          </SidebarColumn>
+        </ContentRow>
+
         <ContentRow>
           <PrimaryColumn>
             <SubsectionHeader
@@ -492,7 +510,7 @@ export default function CISOReport2026() {
       <SectionWrapper id="ai-governance">
         <SectionHeader
           eyebrow="Section 06"
-          title="AI Governance and Risk Management Maturity"
+          title="AI Governance and Risk Management"
           description="Organizations face a critical gap between AI adoption velocity and security preparedness, with structural vulnerabilities across governance, technical capability, and executive protection."
         />
 
@@ -537,6 +555,28 @@ export default function CISOReport2026() {
             <MetricCard value="52%" label="Developing but inconsistent" sentiment="warning" />
             <CalloutBox variant="warning">
               Only 25% of organizations report "established and repeatable" AI governance processes with 66% of private and 53% of public companies having no plans to hire dedicated AI security leadership.
+            </CalloutBox>
+          </SidebarColumn>
+        </ContentRow>
+
+        <ContentRow className="mb-8">
+          <PrimaryColumn>
+            <SubsectionHeader
+              title="AI Challenges and Concerns"
+              description="AI security spending averages anticipated spend of 7% of total security budget"
+            />
+            <AIGovernanceChallengesByCompanyChart />
+          </PrimaryColumn>
+        </ContentRow>
+
+        <ContentRow className="mb-16">
+          <PrimaryColumn>
+            <AIConcernsByCompanyChart />
+          </PrimaryColumn>
+          <SidebarColumn>
+            <MetricCard value="75%" label="Cite Data Exposure as Top AI Risk" sentiment="warning" />
+            <CalloutBox variant="insight">
+              Data Exposure Dominates AI Concerns 75% of CISOs cite data exposure/privacy breaches as the top AI risk, followed by shadow AI bypassing controls (49%).
             </CalloutBox>
           </SidebarColumn>
         </ContentRow>
