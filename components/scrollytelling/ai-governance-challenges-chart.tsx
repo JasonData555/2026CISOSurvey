@@ -328,8 +328,8 @@ export function AIGovernanceChallengesChart({ className }: { className?: string 
             </div>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-            73% have AI governance that is ad hoc and inconsistent (52% developing + 21% initial),
-            with only 25% achieving established and repeatable processes. Just 2% have reached optimized maturity.
+            73% lack mature AI governance (52% Developing but inconsistent + 21% Initial / ad hoc),
+            with only 25% achieving Established and Repeatable processes and just 2% reaching Optimized maturity.
           </p>
         </div>
       </div>

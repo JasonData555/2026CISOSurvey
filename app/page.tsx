@@ -248,7 +248,7 @@ export default function CISOReport2026() {
           <MetricCard value="97%" label="Lack Mature Frameworks" sentiment="bad" />
           <MetricCard value="36%" label="Private CISOs Without Liability Protection" sentiment="bad" />
           <MetricCard value="43%" label="Third-Party Risk as #1 Priority" sentiment="warning" />
-          <MetricCard value="YOY+" label="NextGen Compensation Growth Outpacing CISO" sentiment="neutral" />
+          <MetricCard value="+6% YoY" label="NextGen Compensation Growth Outpacing CISO" sentiment="neutral" />
         </StatGrid>
 
         <p className="text-lead max-w-3xl">
