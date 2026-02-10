@@ -243,11 +243,11 @@ export default function CISOReport2026() {
         />
 
         <StatGrid columns={3} className="mb-12">
-          <MetricCard value="$128K" label="Public-Private Compensation Gap" sentiment="warning" />
-          <MetricCard value="30-32%" label="CTO/Engineering Reporting Dominance" sentiment="neutral" />
-          <MetricCard value="97%" label="Lack Mature Frameworks" sentiment="bad" />
-          <MetricCard value="36%" label="Private CISOs Without Liability Protection" sentiment="bad" />
-          <MetricCard value="43%" label="Third-Party Risk as #1 Priority" sentiment="warning" />
+          <MetricCard value="$128K" label="Public Company vs Private Company Compensation Gap" sentiment="warning" />
+          <MetricCard value="30-32%" label="CISO Report to CTO / Engineering" sentiment="neutral" />
+          <MetricCard value="2%" label="Have Optimized AI Governance" sentiment="bad" />
+          <MetricCard value="36%" label="Private Company CISOs Without Liability Protection" sentiment="bad" />
+          <MetricCard value="43%" label="CISOs Report Third Party Risk as #1 Priority" sentiment="warning" />
           <MetricCard value="+6% YoY" label="NextGen Compensation Growth Outpacing CISO" sentiment="neutral" />
         </StatGrid>
 
