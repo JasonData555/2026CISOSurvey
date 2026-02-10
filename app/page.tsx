@@ -12,7 +12,6 @@ import { CalloutBox } from "@/components/scrollytelling/callout-box";
 import { CompensationComparisonChart } from "@/components/scrollytelling/compensation-comparison-chart";
 import { ReportingStructureSankeyChart } from "@/components/scrollytelling/reporting-structure-sankey";
 import { AIGovernanceChallengesChart } from "@/components/scrollytelling/ai-governance-challenges-chart";
-import { ConfidenceMeterVisualization } from "@/components/scrollytelling/confidence-meter-visualization";
 import { CEOReportingSlopeChart } from "@/components/scrollytelling/ceo-reporting-slope-chart";
 import { BoardReportingChart } from "@/components/scrollytelling/board-reporting-chart";
 import { ThreatPrioritiesTreemap } from "@/components/charts/threat-priorities-treemap";
@@ -305,7 +304,7 @@ export default function CISOReport2026() {
           </PrimaryColumn>
           <SidebarColumn>
             <CalloutBox variant="insight">
-              Compensation differences by location remain significant — with a 2.4× spread between top-paying markets such as Seattle and lower-cost metros like Kansas City.
+              Compensation differences by location remain significant, with a 2.4x spread between top-paying markets such as Seattle and lower-cost metros like Kansas City.
             </CalloutBox>
           </SidebarColumn>
         </ContentRow>
@@ -515,23 +514,8 @@ export default function CISOReport2026() {
           </PrimaryColumn>
           <SidebarColumn>
             <MetricCard value="6%" label="Private Companies with Dedicated AI Security Leaders" sentiment="bad" />
-            <MetricCard value="85%" label="Security Leaders Lack Full Confidence in Technical Assessment" sentiment="warning" />
+            <MetricCard value="84%" label="Security Leaders Lack Full Confidence in Technical Assessment" sentiment="warning" />
           </SidebarColumn>
-        </ContentRow>
-
-        <ContentRow className="mb-16">
-          <PrimaryColumn>
-            <SubsectionHeader
-              title="Technical Assessment Capability Crisis"
-              description="Only 16% of CISOs express high confidence in their recruiting team's technical assessment ability."
-            />
-            <ConfidenceMeterVisualization />
-            <p className="mt-6 text-muted-foreground leading-relaxed">
-              This assessment deficit creates a compounding vulnerability: organizations may have 
-              significantly more security headcount than actual security capability, particularly 
-              as teams rapidly adopt AI-driven tools without adequate evaluation frameworks.
-            </p>
-          </PrimaryColumn>
         </ContentRow>
 
         <ContentRow className="mb-16">
@@ -604,7 +588,7 @@ export default function CISOReport2026() {
           <SidebarColumn>
             <MetricCard value="43%" label="Third-Party Risk as #1 Security Priority" sentiment="warning" />
             <CalloutBox variant="insight">
-              Third-party risk ranks as the overwhelming #1 priority—modernize TPRM programs 
+              Third-party risk ranks as the overwhelming #1 priority. Modernize TPRM programs
               with continuous monitoring and tiered risk frameworks.
             </CalloutBox>
           </SidebarColumn>
@@ -697,7 +681,7 @@ export default function CISOReport2026() {
       {/* International CISO Section */}
       <SectionWrapper id="international" variant="default">
         <SectionHeader
-          eyebrow="Section 08.5"
+          eyebrow="Section 09"
           title="International CISO Landscape"
           description="European and international CISOs operate in distinctly different contexts; 32% lower compensation, broader regulatory responsibilities, and unique team scaling patterns shaped by GDPR and centralized governance models."
         />
@@ -753,11 +737,11 @@ export default function CISOReport2026() {
           <SidebarColumn>
             <MetricCard value="85%" label="TPRM Ownership" sentiment="good" />
             <CalloutBox variant="default" className="text-xs">
-              vs 41% in North America—largest gap (+44pp) driven by GDPR, NIS2, and DORA regulatory emphasis
+              vs 41% in North America. Largest gap (+44pp) driven by GDPR, NIS2, and DORA regulatory emphasis
             </CalloutBox>
             <MetricCard value="73%" label="Privacy Ownership" sentiment="good" />
             <CalloutBox variant="default" className="text-xs">
-              vs 58% in North America (+15pp)—GDPR enforcement and DPO reporting structures
+              vs 58% in North America (+15pp). GDPR enforcement and DPO reporting structures
             </CalloutBox>
             <MetricCard value="10" label="Avg Functions Per CISO" sentiment="neutral" />
           </SidebarColumn>
@@ -767,7 +751,7 @@ export default function CISOReport2026() {
       {/* Strategic Recommendations Section */}
       <SectionWrapper id="recommendations" variant="muted">
         <SectionHeader
-          eyebrow="Section 09"
+          eyebrow="Section 10"
           title="Strategic Imperatives for 2026"
           description="Six critical actions for security leaders navigating compensation, governance, and organizational challenges. Click any imperative to explore implementation details and related data points."
         />

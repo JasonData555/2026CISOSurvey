@@ -84,9 +84,10 @@ const CustomTreemapContent = ({
 }: CustomContentProps) => {
   if (depth !== 1 || width < 1 || height < 1) return null;
 
-  const showFullLabel = width > 80 && height > 60;
-  const showValue = width > 50 && height > 40;
+  const showFullLabel = width > 70 && height > 50;
+  const showValue = width > 40 && height > 35;
   const isLarge = width > 120 && height > 80;
+  const isMedium = width > 80 && height > 60;
   const isDark = ["#003087", "#0055c4", "#404040", "#555555", "#777777", "#d4d4d4"].includes(fill || "");
 
   return (
@@ -113,12 +114,12 @@ const CustomTreemapContent = ({
         <>
           <text
             x={x + width / 2}
-            y={y + height / 2 - (showFullLabel ? (isLarge ? 12 : 8) : 0)}
+            y={y + height / 2 - (showFullLabel ? (isLarge ? 12 : isMedium ? 10 : 6) : 0)}
             textAnchor="middle"
             dominantBaseline="middle"
             fill={isDark ? "#ffffff" : "#0a0a0a"}
             style={{
-              fontSize: isLarge ? "1.75rem" : width > 100 ? "1.25rem" : "1rem",
+              fontSize: isLarge ? "1.75rem" : isMedium ? "1.25rem" : width > 60 ? "1rem" : "0.875rem",
               fontWeight: 700,
               letterSpacing: "-0.02em",
               fontFamily: "Inter, Helvetica Neue, sans-serif",
@@ -129,19 +130,25 @@ const CustomTreemapContent = ({
           {showFullLabel && name && (
             <text
               x={x + width / 2}
-              y={y + height / 2 + (isLarge ? 16 : 12)}
+              y={y + height / 2 + (isLarge ? 16 : isMedium ? 12 : 8)}
               textAnchor="middle"
               dominantBaseline="middle"
               fill={isDark ? "rgba(255,255,255,0.85)" : "rgba(10,10,10,0.7)"}
               style={{
-                fontSize: isLarge ? "0.75rem" : "0.625rem",
+                fontSize: isLarge ? "0.75rem" : isMedium ? "0.625rem" : "0.5rem",
                 fontWeight: 500,
                 letterSpacing: "0.02em",
                 textTransform: "uppercase",
                 fontFamily: "Inter, Helvetica Neue, sans-serif",
               }}
             >
-              {name.length > 18 && width < 140 ? name.slice(0, 16) + "..." : name}
+              {width < 80
+                  ? (name.length > 8 ? name.slice(0, 6) + "..." : name)
+                  : width < 100
+                    ? (name.length > 10 ? name.slice(0, 8) + "..." : name)
+                    : width < 140
+                      ? (name.length > 14 ? name.slice(0, 12) + "..." : name)
+                      : name}
             </text>
           )}
         </>

@@ -236,9 +236,18 @@ export function CompensationComparisonChart() {
   const [viewMode, setViewMode] = useState<ViewMode>("compensation");
   const [isVisible, setIsVisible] = useState(false);
   const [animationProgress, setAnimationProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const animationDuration = prefersReducedMotion ? 0 : 800;
+
+  // Mobile detection for responsive layout
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -325,7 +334,7 @@ export function CompensationComparisonChart() {
           {viewMode === "compensation" ? (
             <BarChart
               data={compensationData}
-              margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+              margin={{ top: 20, right: 30, left: isMobile ? 40 : 20, bottom: isMobile ? 60 : 20 }}
               barCategoryGap="20%"
             >
               <CartesianGrid
@@ -335,9 +344,13 @@ export function CompensationComparisonChart() {
               />
               <XAxis
                 dataKey="category"
-                tick={{ fontSize: 12, fill: "#525252" }}
+                tick={{ fontSize: isMobile ? 11 : 12, fill: "#525252" }}
                 tickLine={false}
                 axisLine={{ stroke: "#0a0a0a", strokeWidth: 2 }}
+                interval={0}
+                angle={isMobile ? -45 : 0}
+                textAnchor={isMobile ? "end" : "middle"}
+                height={isMobile ? 60 : 30}
               />
               <YAxis
                 tickFormatter={formatCurrency}
@@ -354,9 +367,10 @@ export function CompensationComparisonChart() {
               />
               <Legend
                 verticalAlign="top"
-                height={36}
+                height={isMobile ? 48 : 36}
+                wrapperStyle={{ paddingTop: isMobile ? 8 : 0, paddingBottom: isMobile ? 8 : 0 }}
                 formatter={(value) => (
-                  <span className="text-sm text-foreground">
+                  <span className={isMobile ? "text-xs text-foreground" : "text-sm text-foreground"}>
                     {value === "public" ? "Public Company" : "Private Company"}
                   </span>
                 )}
@@ -389,7 +403,7 @@ export function CompensationComparisonChart() {
           ) : (
             <BarChart
               data={genderPayGapData}
-              margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+              margin={{ top: 20, right: 30, left: isMobile ? 40 : 20, bottom: isMobile ? 60 : 20 }}
               barCategoryGap="15%"
             >
               <CartesianGrid
@@ -399,9 +413,13 @@ export function CompensationComparisonChart() {
               />
               <XAxis
                 dataKey="category"
-                tick={{ fontSize: 12, fill: "#525252" }}
+                tick={{ fontSize: isMobile ? 11 : 12, fill: "#525252" }}
                 tickLine={false}
                 axisLine={{ stroke: "#0a0a0a", strokeWidth: 2 }}
+                interval={0}
+                angle={isMobile ? -45 : 0}
+                textAnchor={isMobile ? "end" : "middle"}
+                height={isMobile ? 60 : 30}
               />
               <YAxis
                 tickFormatter={formatCurrency}
@@ -418,7 +436,8 @@ export function CompensationComparisonChart() {
               />
               <Legend
                 verticalAlign="top"
-                height={36}
+                height={isMobile ? 72 : 36}
+                wrapperStyle={{ paddingTop: isMobile ? 16 : 0, paddingBottom: isMobile ? 8 : 0 }}
                 formatter={(value) => {
                   const labels: Record<string, string> = {
                     publicMale: "Public - Male",
@@ -526,53 +545,6 @@ export function CompensationComparisonChart() {
               </div>
             </div>
           </div>
-        )}
-      </div>
-
-      {/* Legend Explanation */}
-      <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-        {viewMode === "compensation" ? (
-          <>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-[#003087]" />
-              <span className="text-xs text-muted-foreground">
-                Public Company
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-[#737373]" />
-              <span className="text-xs text-muted-foreground">
-                Private Company
-              </span>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-[#003087]" />
-              <span className="text-xs text-muted-foreground">
-                Public - Male
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-[#0055c4]" />
-              <span className="text-xs text-muted-foreground">
-                Public - Female
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-[#404040]" />
-              <span className="text-xs text-muted-foreground">
-                Private - Male
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-[#737373]" />
-              <span className="text-xs text-muted-foreground">
-                Private - Female
-              </span>
-            </div>
-          </>
         )}
       </div>
     </div>

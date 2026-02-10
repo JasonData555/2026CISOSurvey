@@ -233,9 +233,18 @@ function CustomTooltip({ active, payload }: CustomTooltipProps) {
 
 export function InternationalResponsibilitiesChart({ className }: { className?: string }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const animationDuration = prefersReducedMotion ? 0 : (isVisible ? 800 : 0);
+
+  // Mobile detection for responsive layout
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -254,6 +263,12 @@ export function InternationalResponsibilitiesChart({ className }: { className?: 
     return () => observer.disconnect();
   }, []);
 
+  // Truncate labels for mobile display
+  const truncateLabel = (label: string, maxLength: number) => {
+    if (label.length <= maxLength) return label;
+    return label.slice(0, maxLength - 1) + '…';
+  };
+
   return (
     <div ref={containerRef} className={cn("w-full", className)}>
       {/* Chart Header */}
@@ -267,20 +282,18 @@ export function InternationalResponsibilitiesChart({ className }: { className?: 
       </div>
 
       {/* Horizontal Bar Chart */}
-      <div className="overflow-x-auto -mx-2 px-2">
-        <div className="min-w-[600px]">
-          <div className="h-[700px] md:h-[880px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
+      <div className="h-[700px] md:h-[880px] w-full overflow-x-hidden">
+        <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={responsibilitiesData}
             layout="vertical"
-            margin={{ top: 5, right: 30, left: 180, bottom: 5 }}
+            margin={{ top: 5, right: 15, left: isMobile ? 80 : 180, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" horizontal={false} vertical={true} />
             <XAxis
               type="number"
               domain={[0, 100]}
-              tick={{ fontSize: 11, fill: "#525252" }}
+              tick={{ fontSize: isMobile ? 10 : 11, fill: "#525252" }}
               tickFormatter={(value) => `${value}%`}
               axisLine={{ stroke: "#e5e5e5" }}
               tickLine={false}
@@ -288,10 +301,11 @@ export function InternationalResponsibilitiesChart({ className }: { className?: 
             <YAxis
               type="category"
               dataKey="name"
-              tick={{ fontSize: 12, fill: "#525252", fontWeight: 500 }}
+              tick={{ fontSize: isMobile ? 9 : 12, fill: "#525252", fontWeight: 500 }}
               axisLine={false}
               tickLine={false}
-              width={170}
+              width={isMobile ? 75 : 170}
+              tickFormatter={(value) => isMobile ? truncateLabel(value, 10) : value}
             />
             <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0, 48, 135, 0.04)" }} />
 
@@ -313,10 +327,8 @@ export function InternationalResponsibilitiesChart({ className }: { className?: 
                 />
               ))}
             </Bar>
-            </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
+          </BarChart>
+        </ResponsiveContainer>
       </div>
 
       {/* Key Insights */}

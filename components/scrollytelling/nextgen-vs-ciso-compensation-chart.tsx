@@ -163,8 +163,17 @@ interface NextGenVsCISOCompensationChartProps {
 export function NextGenVsCISOCompensationChart({ className }: NextGenVsCISOCompensationChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const animationDuration = prefersReducedMotion ? 0 : (isVisible ? 800 : 0);
+
+  // Mobile detection for responsive layout
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -189,16 +198,20 @@ export function NextGenVsCISOCompensationChart({ className }: NextGenVsCISOCompe
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={nextgenCompensationData}
-            margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+            margin={{ top: 20, right: 30, left: isMobile ? 40 : 20, bottom: isMobile ? 50 : 20 }}
             barGap={8}
             barCategoryGap="25%"
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" vertical={false} />
             <XAxis
               dataKey="category"
-              tick={{ fontSize: 12, fill: "#525252", fontWeight: 500 }}
+              tick={{ fontSize: isMobile ? 11 : 12, fill: "#525252", fontWeight: 500 }}
               tickLine={false}
               axisLine={{ stroke: "#0a0a0a", strokeWidth: 2 }}
+              interval={0}
+              angle={isMobile ? -45 : 0}
+              textAnchor={isMobile ? "end" : "middle"}
+              height={isMobile ? 50 : 30}
             />
             <YAxis
               tick={{ fontSize: 12, fill: "#525252" }}

@@ -60,9 +60,9 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
   }, []);
 
   // Chart dimensions
-  const chartHeight = 420;
-  const barHeight = 40;
-  const barGap = 10;
+  const chartHeight = 500;
+  const barHeight = 48;
+  const barGap = 12;
   const chartWidth = 700;
   const labelColumnWidth = 120;
   const centerX = 420;
@@ -129,7 +129,7 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
               y={20}
               textAnchor="middle"
               className="fill-muted-foreground font-semibold uppercase tracking-wider"
-              style={{ fontSize: isMobile ? 14 : 11 }}
+              style={{ fontSize: isMobile ? 14 : 13 }}
             >
               Private
             </text>
@@ -138,7 +138,7 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
               y={20}
               textAnchor="middle"
               className="fill-muted-foreground font-semibold uppercase tracking-wider"
-              style={{ fontSize: isMobile ? 14 : 11 }}
+              style={{ fontSize: isMobile ? 14 : 13 }}
             >
               Public
             </text>
@@ -245,7 +245,7 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
                     fill={isHighlight ? "#0a0a0a" : "#525252"}
                     fontWeight={isHighlight ? 600 : 500}
                     style={{
-                      fontSize: isMobile ? 14 : 11,
+                      fontSize: isMobile ? 14 : 13,
                       transitionDelay: prefersReducedMotion
                         ? "0ms"
                         : `${index * 80 + 200}ms`,
@@ -297,7 +297,7 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
                     )}
                     fill={privateWidth >= 40 ? "#ffffff" : privateColor}
                     style={{
-                      fontSize: isMobile ? 14 : 11,
+                      fontSize: isMobile ? 14 : 13,
                       transitionDelay: prefersReducedMotion
                         ? "0ms"
                         : `${index * 80 + 400}ms`,
@@ -350,7 +350,7 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
                     )}
                     fill={publicWidth >= 40 ? "#ffffff" : publicColor}
                     style={{
-                      fontSize: isMobile ? 14 : 11,
+                      fontSize: isMobile ? 14 : 13,
                       transitionDelay: prefersReducedMotion
                         ? "0ms"
                         : `${index * 80 + 450}ms`,
@@ -382,7 +382,7 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
                     y={chartHeight - 8}
                     textAnchor="middle"
                     className="fill-muted-foreground"
-                    style={{ fontSize: isMobile ? 13 : 10 }}
+                    style={{ fontSize: isMobile ? 13 : 12 }}
                   >
                     {tick}%
                   </text>
@@ -391,7 +391,7 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
                     y={chartHeight - 8}
                     textAnchor="middle"
                     className="fill-muted-foreground"
-                    style={{ fontSize: isMobile ? 13 : 10 }}
+                    style={{ fontSize: isMobile ? 13 : 12 }}
                   >
                     {tick}%
                   </text>
@@ -403,7 +403,7 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
               y={chartHeight - 8}
               textAnchor="middle"
               className="fill-muted-foreground"
-              style={{ fontSize: isMobile ? 13 : 10 }}
+              style={{ fontSize: isMobile ? 13 : 12 }}
             >
               0%
             </text>

@@ -60,10 +60,10 @@ export function AIGovernanceFrameworksChart({ className }: AIGovernanceFramework
   }, []);
 
   // Chart dimensions
-  const chartHeight = 420;
-  const rowHeight = 55;
-  const barHeight = 18;
-  const barGap = 4;
+  const chartHeight = 500;
+  const rowHeight = 65;
+  const barHeight = 22;
+  const barGap = 5;
   const chartWidth = 700;
   const labelColumnWidth = 150;
   const barAreaWidth = chartWidth - labelColumnWidth - 60;
@@ -154,7 +154,7 @@ export function AIGovernanceFrameworksChart({ className }: AIGovernanceFramework
                     y={chartHeight - 10}
                     textAnchor="middle"
                     className="fill-muted-foreground"
-                    style={{ fontSize: isMobile ? 13 : 10 }}
+                    style={{ fontSize: isMobile ? 13 : 12 }}
                   >
                     {tick}%
                   </text>
@@ -166,7 +166,7 @@ export function AIGovernanceFrameworksChart({ className }: AIGovernanceFramework
               y={chartHeight - 10}
               textAnchor="middle"
               className="fill-muted-foreground"
-              style={{ fontSize: isMobile ? 13 : 10 }}
+              style={{ fontSize: isMobile ? 13 : 12 }}
             >
               0%
             </text>
@@ -235,7 +235,7 @@ export function AIGovernanceFrameworksChart({ className }: AIGovernanceFramework
                     fill={isLeading ? "#0a0a0a" : "#525252"}
                     fontWeight={isLeading ? 600 : 500}
                     style={{
-                      fontSize: isMobile ? 14 : 11,
+                      fontSize: isMobile ? 14 : 13,
                       transitionDelay: prefersReducedMotion
                         ? "0ms"
                         : `${index * 50 + 200}ms`,

@@ -56,9 +56,9 @@ export function ExecutiveLiabilityChart({ className }: ExecutiveLiabilityChartPr
   }, []);
 
   // Chart dimensions
-  const chartHeight = 380;
-  const barHeight = 44;
-  const barGap = 12;
+  const chartHeight = 460;
+  const barHeight = 52;
+  const barGap = 14;
   const chartWidth = 700; // Expanded from 600 to accommodate left labels
   const labelColumnWidth = 100; // Left column for category labels
   const centerX = 400; // Center of chart area (labelColumnWidth + 300)
@@ -237,7 +237,7 @@ export function ExecutiveLiabilityChart({ className }: ExecutiveLiabilityChartPr
                     y={yPosition + barHeight / 2 + 5}
                     textAnchor="end"
                     className={cn(
-                      "text-[12px] transition-opacity",
+                      "text-[14px] transition-opacity",
                       prefersReducedMotion ? "duration-0" : "duration-500",
                       isVisible ? "opacity-100" : "opacity-0"
                     )}
@@ -288,7 +288,7 @@ export function ExecutiveLiabilityChart({ className }: ExecutiveLiabilityChartPr
                     y={yPosition + barHeight / 2 + 5}
                     textAnchor={privateWidth >= 50 ? "start" : "end"}
                     className={cn(
-                      "text-[12px] font-bold transition-opacity",
+                      "text-[14px] font-bold transition-opacity",
                       prefersReducedMotion ? "duration-0" : "duration-500",
                       isVisible ? "opacity-100" : "opacity-0"
                     )}
@@ -339,7 +339,7 @@ export function ExecutiveLiabilityChart({ className }: ExecutiveLiabilityChartPr
                     y={yPosition + barHeight / 2 + 5}
                     textAnchor={publicWidth >= 50 ? "end" : "start"}
                     className={cn(
-                      "text-[12px] font-bold transition-opacity",
+                      "text-[14px] font-bold transition-opacity",
                       prefersReducedMotion ? "duration-0" : "duration-500",
                       isVisible ? "opacity-100" : "opacity-0"
                     )}

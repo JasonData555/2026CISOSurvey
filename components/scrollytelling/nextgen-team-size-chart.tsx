@@ -148,7 +148,7 @@ export function NextGenTeamSizeChart({ className }: { className?: string }) {
   return (
     <div className={cn("space-y-8", className)}>
       {/* Main Chart Area */}
-      <div className="relative">
+      <div className="relative pl-8 md:pl-10">
         <div className="h-80 md:h-96">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
@@ -206,7 +206,7 @@ export function NextGenTeamSizeChart({ className }: { className?: string }) {
         </div>
 
         {/* Y-axis label */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 origin-center">
+        <div className="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 -rotate-90 origin-center">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground whitespace-nowrap">
             Avg. Team Size
           </span>
