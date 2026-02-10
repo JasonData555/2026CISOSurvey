@@ -258,7 +258,7 @@ export default function CISOReport2026() {
       </SectionWrapper>
 
       {/* Compensation Analysis Section */}
-      <SectionWrapper id="compensation" variant="muted">
+      <SectionWrapper id="compensation" variant="default">
         <SectionHeader
           eyebrow="Section 01"
           title="Compensation Analysis"
@@ -328,7 +328,7 @@ export default function CISOReport2026() {
       </SectionWrapper>
 
       {/* Reporting Structure Section */}
-      <SectionWrapper id="reporting-structure">
+      <SectionWrapper id="reporting-structure" variant="muted">
         <SectionHeader
           eyebrow="Section 02"
           title="Reporting Structure Evolution"
@@ -460,7 +460,7 @@ export default function CISOReport2026() {
       </SectionWrapper>
 
       {/* CISO Functional Responsibilities Section */}
-      <SectionWrapper id="functional-responsibilities">
+      <SectionWrapper id="functional-responsibilities" variant="muted">
         <SectionHeader
           eyebrow="Section 05"
           title="CISO Functional Responsibilities"
@@ -483,17 +483,6 @@ export default function CISOReport2026() {
           </SidebarColumn>
         </ContentRow>
 
-        <ContentRow className="mb-16">
-          <PrimaryColumn>
-            <CalloutBox variant="insight">
-              While 93% of CISOs own Incident Response and 90% manage Cloud Security,
-              only 30% have direct responsibility for AI Ethics despite 83% owning AI Data Protection.
-              This gap between technical control and governance oversight creates the AI leadership vacuum
-              explored in the next section.
-            </CalloutBox>
-          </PrimaryColumn>
-        </ContentRow>
-
         <ContentRow>
           <PrimaryColumn>
             <CalloutBox variant="insight">
@@ -501,7 +490,8 @@ export default function CISOReport2026() {
               Cloud Security, SecOps at 88-93%), <strong>converging risk functions</strong> (Privacy, GRC, TPRM at 82-85%),
               and <strong>fragmented emerging functions</strong> (AI Ethics, Post-Quantum Cryptography, Fraud at 18-30%).
               This fragmentation in emerging areas suggests either unclear ownership models or security functions
-              still maturing into CISO portfolios.
+              still maturing into CISO portfolios. This gap between technical control and governance oversight creates
+              the AI leadership vacuum explored in the next section.
             </CalloutBox>
           </PrimaryColumn>
         </ContentRow>
