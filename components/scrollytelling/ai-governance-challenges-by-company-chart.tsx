@@ -43,7 +43,7 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
+        if (entry.isIntersecting) {
           setIsVisible(true);
         }
       },

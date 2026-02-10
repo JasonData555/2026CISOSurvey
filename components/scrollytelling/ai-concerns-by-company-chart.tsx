@@ -45,7 +45,7 @@ export function AIConcernsByCompanyChart({ className }: AIConcernsByCompanyChart
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
+        if (entry.isIntersecting) {
           setIsVisible(true);
         }
       },
