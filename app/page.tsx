@@ -449,11 +449,11 @@ export default function CISOReport2026() {
         <ContentRow>
           <PrimaryColumn>
             <p className="text-muted-foreground leading-relaxed">
-              The federation effect becomes visible beyond 10,000 employees, where average team size 
-              contracts 47% to 129 personnel. Large enterprises distribute security responsibilities 
-              into platform teams, IT functions, and enterprise risk organizations. The CISO role 
-              transitions from hands-on program execution to governance, influence, and strategic 
-              oversight across federated security capabilities.
+              The &ldquo;federation effect&rdquo; becomes visible for organizations larger than 10,000 employees,
+              where average team size contracts 47% to 129. Large enterprises distribute security
+              responsibilities into other organizations including platform teams, IT functions, and
+              enterprise risk (GRC). The CISO role transitions from large, self contained organization
+              to governance, influence, and strategic oversight across federated security capabilities.
             </p>
           </PrimaryColumn>
         </ContentRow>
