@@ -36,7 +36,7 @@ const FUNCTION_DATA: FunctionData[] = [
     description: "Security operations center, monitoring, and threat detection"
   },
   {
-    name: "Corporate / IT Security",
+    name: "IT",
     percentage: 88,
     category: "operational",
     fill: "#87a58e",
