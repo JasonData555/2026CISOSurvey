@@ -111,10 +111,10 @@ function ConfidenceMeterBar({ label, segments, isVisible, delay, prefersReducedM
               </TooltipTrigger>
               <TooltipContent
                 side="top"
-                className="bg-foreground text-background border-none px-3 py-2"
+                className="bg-card text-foreground border border-border px-3 py-2 shadow-lg"
               >
                 <p className="font-semibold">{segment.label}</p>
-                <p className="text-sm opacity-80">{segment.value}% of CISOs</p>
+                <p className="text-sm text-muted-foreground">{segment.value}% of CISOs</p>
               </TooltipContent>
             </Tooltip>
           ))}
@@ -179,27 +179,6 @@ export function ConfidenceMeterVisualization({ className }: ConfidenceMeterVisua
             Confidence in recruiting team&apos;s ability to assess technical depth
           </p>
         </div>
-      </div>
-
-      {/* Key metric callout */}
-      <div
-        className={cn(
-          "bg-[#c41e3a]/5 border-l-4 border-[#c41e3a] p-4 transition-all",
-          prefersReducedMotion ? "duration-0" : "duration-700",
-          isVisible
-            ? "opacity-100 translate-x-0"
-            : prefersReducedMotion
-              ? "opacity-100 translate-x-0"
-              : "opacity-0 -translate-x-4"
-        )}
-      >
-        <div className="flex items-baseline gap-2">
-          <span className="text-4xl font-bold text-[#c41e3a]">85%</span>
-          <span className="text-lg font-medium text-foreground">of security leaders</span>
-        </div>
-        <p className="text-sm text-muted-foreground mt-1">
-          lack full confidence in their internal recruiting team&apos;s technical assessment capability
-        </p>
       </div>
 
       {/* Confidence meter bars */}

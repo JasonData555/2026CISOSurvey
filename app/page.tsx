@@ -16,6 +16,7 @@ import { CEOReportingSlopeChart } from "@/components/scrollytelling/ceo-reportin
 import { BoardReportingChart } from "@/components/scrollytelling/board-reporting-chart";
 import { ThreatPrioritiesTreemap } from "@/components/charts/threat-priorities-treemap";
 import { AISecurityLeadershipChart } from "@/components/scrollytelling/ai-security-leadership-chart";
+import { ConfidenceMeterVisualization } from "@/components/scrollytelling/confidence-meter-visualization";
 import { Footer } from "@/components/scrollytelling/footer";
 import { TeamSizeScalingCurve } from "@/components/scrollytelling/team-size-scaling-curve";
 import { NextGenVsCISOCompensationChart } from "@/components/scrollytelling/nextgen-vs-ciso-compensation-chart";
@@ -516,6 +517,18 @@ export default function CISOReport2026() {
             <MetricCard value="6%" label="Private Companies with Dedicated AI Security Leaders" sentiment="bad" />
             <MetricCard value="84%" label="Security Leaders Lack Full Confidence in Technical Assessment" sentiment="warning" />
           </SidebarColumn>
+        </ContentRow>
+
+        <ContentRow className="mb-16">
+          <PrimaryColumn>
+            <SubsectionHeader
+              title="Technical Assessment Confidence Gap"
+              description="CISOs lack confidence in their ability to evaluate technical talent."
+            />
+            <ConfidenceMeterVisualization />
+          </PrimaryColumn>
+          <SidebarColumn />
+
         </ContentRow>
 
         <ContentRow className="mb-16">

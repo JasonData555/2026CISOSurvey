@@ -51,6 +51,31 @@ const THREAT_DATA: ThreatData[] = [
   },
 ];
 
+// Helper function to wrap labels into multiple lines for narrow boxes
+const wrapLabel = (text: string, width: number): string[] => {
+  const words = text.split(/[\s-]+/);
+
+  // For wide boxes, return full text
+  if (width >= 140 || words.length === 1) return [text];
+
+  // For medium boxes, try to fit on one line with truncation
+  if (width >= 100) {
+    return [text.length > 14 ? text.slice(0, 12) + "..." : text];
+  }
+
+  // For narrow boxes (< 100), split into two lines if possible
+  if (words.length >= 2) {
+    const mid = Math.ceil(words.length / 2);
+    return [
+      words.slice(0, mid).join(" "),
+      words.slice(mid).join(" ")
+    ].filter(line => line.length > 0);
+  }
+
+  // Fallback: truncate single word
+  return [text.length > 8 ? text.slice(0, 6) + "..." : text];
+};
+
 interface CustomContentProps {
   x?: number;
   y?: number;
@@ -127,30 +152,41 @@ const CustomTreemapContent = ({
           >
             {value}%
           </text>
-          {showFullLabel && name && (
-            <text
-              x={x + width / 2}
-              y={y + height / 2 + (isLarge ? 16 : isMedium ? 12 : 8)}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              fill={isDark ? "rgba(255,255,255,0.85)" : "rgba(10,10,10,0.7)"}
-              style={{
-                fontSize: isLarge ? "0.75rem" : isMedium ? "0.625rem" : "0.5rem",
-                fontWeight: 500,
-                letterSpacing: "0.02em",
-                textTransform: "uppercase",
-                fontFamily: "Inter, Helvetica Neue, sans-serif",
-              }}
-            >
-              {width < 80
-                  ? (name.length > 8 ? name.slice(0, 6) + "..." : name)
-                  : width < 100
-                    ? (name.length > 10 ? name.slice(0, 8) + "..." : name)
-                    : width < 140
-                      ? (name.length > 14 ? name.slice(0, 12) + "..." : name)
-                      : name}
-            </text>
-          )}
+          {showFullLabel && name && (() => {
+            const lines = wrapLabel(name, width);
+            const fontSize = isLarge ? "0.75rem" : isMedium ? "0.625rem" : "0.5rem";
+            const lineHeight = isLarge ? 14 : isMedium ? 11 : 9;
+            const baseY = y + height / 2 + (isLarge ? 16 : isMedium ? 12 : 8);
+            // Adjust starting Y position for multi-line text
+            const startY = lines.length > 1 ? baseY - lineHeight / 2 : baseY;
+
+            return (
+              <text
+                x={x + width / 2}
+                y={startY}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fill={isDark ? "rgba(255,255,255,0.85)" : "rgba(10,10,10,0.7)"}
+                style={{
+                  fontSize,
+                  fontWeight: 500,
+                  letterSpacing: "0.02em",
+                  textTransform: "uppercase",
+                  fontFamily: "Inter, Helvetica Neue, sans-serif",
+                }}
+              >
+                {lines.map((line, i) => (
+                  <tspan
+                    key={i}
+                    x={x + width / 2}
+                    dy={i === 0 ? 0 : lineHeight}
+                  >
+                    {line}
+                  </tspan>
+                ))}
+              </text>
+            );
+          })()}
         </>
       )}
     </g>

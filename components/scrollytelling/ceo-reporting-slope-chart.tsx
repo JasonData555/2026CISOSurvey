@@ -450,7 +450,7 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
               <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">CEO</p>
               <div className="flex items-baseline gap-2">
                 <span className="text-sm font-mono text-foreground">32%</span>
-                <span className="text-xs text-muted-foreground">→</span>
+                <span className="text-xs text-muted-foreground">to</span>
                 <span className="text-sm font-mono text-foreground">3%</span>
               </div>
               <p className="text-xs text-[#c41e3a] font-medium mt-1">-91% decline</p>
@@ -466,10 +466,10 @@ export function CEOReportingSlopeChart({ className }: { className?: string }) {
               <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">CIO</p>
               <div className="flex items-baseline gap-2">
                 <span className="text-sm font-mono text-foreground">7%</span>
-                <span className="text-xs text-muted-foreground">→</span>
+                <span className="text-xs text-muted-foreground">to</span>
                 <span className="text-sm font-mono text-foreground">47%</span>
               </div>
-              <p className="text-xs text-[#059669] font-medium mt-1">+571% growth</p>
+              <p className="text-xs text-[#059669] font-medium mt-1">+571% increase</p>
             </div>
           </div>
         </div>

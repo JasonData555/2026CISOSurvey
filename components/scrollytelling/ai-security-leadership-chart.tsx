@@ -103,9 +103,18 @@ export function AISecurityLeadershipChart({
 }: AISecurityLeadershipChartProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredBar, setHoveredBar] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const animationDuration = prefersReducedMotion ? 0 : (isVisible ? 800 : 0);
+
+  // Mobile detection for responsive labels
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -175,11 +184,12 @@ export function AISecurityLeadershipChart({
               axisLine={{ stroke: COLORS.grid }}
               tickLine={false}
               tick={{
-                fontSize: 12,
+                fontSize: isMobile ? 10 : 12,
                 fontWeight: 500,
                 fill: COLORS.text,
               }}
               dy={10}
+              interval={0}
             />
             <YAxis
               domain={[0, 70]}
@@ -196,19 +206,7 @@ export function AISecurityLeadershipChart({
               content={<CustomTooltip />}
               cursor={{ fill: "rgba(0, 48, 135, 0.05)" }}
             />
-            <ReferenceLine
-              y={50}
-              stroke={COLORS.grid}
-              strokeDasharray="4 4"
-              label={{
-                value: "Majority threshold",
-                position: "insideTopRight",
-                fontSize: 10,
-                fill: COLORS.text,
-                opacity: 0.7,
-              }}
-            />
-
+            
             <Bar
               dataKey="private"
               name="Private"

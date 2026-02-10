@@ -245,14 +245,6 @@ export function ReportingStructureSankeyChart({ className }: { className?: strin
             Public Companies
           </button>
         </div>
-
-        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-3" style={{ backgroundColor: "#003087" }} />
-            <span className="hidden sm:inline">CTO/Engineering (Highlighted)</span>
-            <span className="sm:hidden">CTO/Eng</span>
-          </div>
-        </div>
       </div>
 
       {/* Mobile scroll hint */}

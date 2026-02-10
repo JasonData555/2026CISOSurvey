@@ -199,8 +199,17 @@ interface FunctionalResponsibilitiesChartProps {
 
 export function FunctionalResponsibilitiesChart({ className }: FunctionalResponsibilitiesChartProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+
+  // Mobile detection for responsive layout
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Intersection observer for animation trigger
   useEffect(() => {
@@ -220,29 +229,34 @@ export function FunctionalResponsibilitiesChart({ className }: FunctionalRespons
     return () => observer.disconnect();
   }, []);
 
+  // Truncate labels for mobile display
+  const truncateLabel = (label: string, maxLength: number) => {
+    if (label.length <= maxLength) return label;
+    return label.slice(0, maxLength - 1) + '…';
+  };
+
   return (
     <div ref={containerRef} className={cn("w-full", className)}>
-      <div className="overflow-x-auto -mx-2 px-2">
-        <div className="min-w-[600px]">
-          <ResponsiveContainer width="100%" height={700}>
+      <ResponsiveContainer width="100%" height={700}>
         <BarChart
           data={FUNCTION_DATA}
           layout="vertical"
-          margin={{ top: 5, right: 30, left: 180, bottom: 5 }}
+          margin={{ top: 5, right: 20, left: 0, bottom: 5 }}
         >
           <XAxis
             type="number"
             domain={[0, 100]}
             tickFormatter={(value) => `${value}%`}
             stroke="#737373"
-            style={{ fontSize: '13px' }}
+            style={{ fontSize: isMobile ? 11 : 13 }}
           />
           <YAxis
             type="category"
             dataKey="name"
-            width={170}
+            width={isMobile ? 100 : 180}
             stroke="#737373"
-            tick={{ fontSize: 13 }}
+            tick={{ fontSize: isMobile ? 11 : 13 }}
+            tickFormatter={(value) => isMobile ? truncateLabel(value, 12) : value}
           />
           <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0, 48, 135, 0.05)" }} />
           <Bar
@@ -258,9 +272,7 @@ export function FunctionalResponsibilitiesChart({ className }: FunctionalRespons
             ))}
           </Bar>
         </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
+      </ResponsiveContainer>
     </div>
   );
 }
