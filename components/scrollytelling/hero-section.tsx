@@ -93,19 +93,19 @@ export function HeroSection() {
           <div className="border-l-2 border-white/30 pl-4">
             <span className="block text-3xl md:text-4xl font-bold tracking-tight">$128K</span>
             <span className="text-xs md:text-sm text-white/60 uppercase tracking-wide mt-1 block">
-              Public-Private Gap
+              Public Company - Private Company Gap
             </span>
           </div>
           <div className="border-l-2 border-white/30 pl-4">
-            <span className="block text-3xl md:text-4xl font-bold tracking-tight">95%+</span>
+            <span className="block text-3xl md:text-4xl font-bold tracking-tight">2%</span>
             <span className="text-xs md:text-sm text-white/60 uppercase tracking-wide mt-1 block">
-              AI Governance Immaturity
+              Optimized AI Governance
             </span>
           </div>
           <div className="border-l-2 border-white/30 pl-4 col-span-2 md:col-span-1">
             <span className="block text-3xl md:text-4xl font-bold tracking-tight">43%</span>
             <span className="text-xs md:text-sm text-white/60 uppercase tracking-wide mt-1 block">
-              Third-Party Risk Priority
+              Third-Party Risk Top Priority
             </span>
           </div>
         </div>

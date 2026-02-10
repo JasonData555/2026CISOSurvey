@@ -97,8 +97,8 @@ const imperatives: Imperative[] = [
       "Designate AI security ownership, implement shadow AI detection, establish vendor AI risk assessment criteria, and adopt baseline frameworks (NIST AI RMF minimum). The governance gap represents the most significant structural vulnerability facing CISOs in 2026.",
     icon: Brain,
     metric: {
-      value: "95%+",
-      label: "AI Governance Immaturity",
+      value: "2%",
+      label: "Optimized AI Governance",
       sentiment: "bad",
     },
     implementationSteps: [
