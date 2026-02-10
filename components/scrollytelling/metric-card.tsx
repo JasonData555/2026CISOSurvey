@@ -3,7 +3,6 @@
 import React from "react"
 
 import { cn } from "@/lib/utils";
-import { ArrowUp, ArrowDown, Minus } from "lucide-react";
 
 type Sentiment = "good" | "bad" | "warning" | "neutral";
 
@@ -34,13 +33,6 @@ export function MetricCard({
     neutral: "text-[#003087]",
   };
 
-  const SentimentIcon = {
-    good: ArrowUp,
-    bad: ArrowDown,
-    warning: Minus,
-    neutral: null,
-  }[sentiment];
-
   return (
     <div
       className={cn(
@@ -49,16 +41,9 @@ export function MetricCard({
         className
       )}
     >
-      <div className="flex items-start justify-between gap-2">
-        <span className={cn("metric-value", sentimentValueColor[sentiment])}>
-          {value}
-        </span>
-        {SentimentIcon && (
-          <SentimentIcon
-            className={cn("w-5 h-5 mt-2", sentimentValueColor[sentiment])}
-          />
-        )}
-      </div>
+      <span className={cn("metric-value", sentimentValueColor[sentiment])}>
+        {value}
+      </span>
       <p className="metric-label mt-3">{label}</p>
     </div>
   );
