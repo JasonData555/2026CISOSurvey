@@ -21,10 +21,10 @@ export function MetricCard({
   className,
 }: MetricCardProps) {
   const sentimentStyles: Record<Sentiment, string> = {
-    good: "border-l-4 border-l-[#059669]",
-    bad: "border-l-4 border-l-[#c41e3a]",
-    warning: "border-l-4 border-l-[#d97706]",
-    neutral: "border-l-4 border-l-[#003087]",
+    good: "",
+    bad: "",
+    warning: "",
+    neutral: "",
   };
 
   const sentimentValueColor: Record<Sentiment, string> = {

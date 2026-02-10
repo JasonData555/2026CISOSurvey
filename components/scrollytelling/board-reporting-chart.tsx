@@ -255,12 +255,12 @@ export function BoardReportingChart({ className }: { className?: string }) {
         </div>
         <div className="p-4 border border-border shadow-sm border-l-4 border-l-[#c41e3a]">
           <p className="text-2xl font-bold text-[#c41e3a]">9%</p>
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Public No Report</p>
+          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Public Does not report</p>
           <p className="text-xs text-[#c41e3a] font-medium mt-1">-9% YoY</p>
         </div>
         <div className="p-4 border border-border shadow-sm border-l-4 border-l-[#c41e3a]">
           <p className="text-2xl font-bold text-[#c41e3a]">15%</p>
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Private No Report</p>
+          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Private Does not report</p>
           <p className="text-xs text-[#c41e3a] font-medium mt-1">-19% YoY</p>
         </div>
       </div>
