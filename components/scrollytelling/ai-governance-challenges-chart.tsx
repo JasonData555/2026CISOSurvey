@@ -211,7 +211,7 @@ export function AIGovernanceChallengesChart({ className }: { className?: string 
               <span className="block text-4xl md:text-5xl font-bold text-[#ea580c] tracking-tight">
                 52%
               </span>
-              <span className="block text-[10px] md:text-xs font-medium text-muted-foreground uppercase tracking-widest mt-2 max-w-[140px] leading-tight">
+              <span className="block text-xs font-medium text-muted-foreground uppercase tracking-widest mt-2 max-w-[140px] leading-tight">
                 Developing but Inconsistent
               </span>
             </div>

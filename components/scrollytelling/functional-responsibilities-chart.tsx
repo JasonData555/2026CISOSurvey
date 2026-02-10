@@ -222,7 +222,9 @@ export function FunctionalResponsibilitiesChart({ className }: FunctionalRespons
 
   return (
     <div ref={containerRef} className={cn("w-full", className)}>
-      <ResponsiveContainer width="100%" height={700}>
+      <div className="overflow-x-auto -mx-2 px-2">
+        <div className="min-w-[600px]">
+          <ResponsiveContainer width="100%" height={700}>
         <BarChart
           data={FUNCTION_DATA}
           layout="vertical"
@@ -256,7 +258,9 @@ export function FunctionalResponsibilitiesChart({ className }: FunctionalRespons
             ))}
           </Bar>
         </BarChart>
-      </ResponsiveContainer>
+          </ResponsiveContainer>
+        </div>
+      </div>
     </div>
   );
 }

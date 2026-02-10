@@ -267,8 +267,10 @@ export function InternationalResponsibilitiesChart({ className }: { className?: 
       </div>
 
       {/* Horizontal Bar Chart */}
-      <div className="h-[700px] md:h-[880px] w-full">
-        <ResponsiveContainer width="100%" height="100%">
+      <div className="overflow-x-auto -mx-2 px-2">
+        <div className="min-w-[600px]">
+          <div className="h-[700px] md:h-[880px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={responsibilitiesData}
             layout="vertical"
@@ -311,8 +313,10 @@ export function InternationalResponsibilitiesChart({ className }: { className?: 
                 />
               ))}
             </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+            </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       </div>
 
       {/* Key Insights */}

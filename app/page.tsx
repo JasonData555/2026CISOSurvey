@@ -537,7 +537,7 @@ export default function CISOReport2026() {
         <ContentRow className="mb-16">
           <PrimaryColumn>
             <SubsectionHeader
-              title="AI Governance Challenges"
+              title="AI Governance and Risk Management Maturity"
               description="Shadow AI and accountability definition top the list of governance concerns."
             />
             <AIGovernanceChallengesChart />

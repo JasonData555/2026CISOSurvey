@@ -9,6 +9,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface AIConcern {
   concern: string;
@@ -40,6 +41,7 @@ export function AIConcernsByCompanyChart({ className }: AIConcernsByCompanyChart
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
+  const isMobile = useIsMobile();
 
   // Intersection observer for scroll-triggered animation
   useEffect(() => {
@@ -112,11 +114,11 @@ export function AIConcernsByCompanyChart({ className }: AIConcernsByCompanyChart
       <div className="flex items-center gap-6 mb-6">
         <div className="flex items-center gap-2">
           <div className="w-4 h-3 rounded-sm" style={{ backgroundColor: "#737373" }} />
-          <span className="text-xs text-muted-foreground font-medium">Private</span>
+          <span className="text-sm md:text-xs text-muted-foreground font-medium">Private</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-4 h-3 rounded-sm" style={{ backgroundColor: "#003087" }} />
-          <span className="text-xs text-muted-foreground font-medium">Public</span>
+          <span className="text-sm md:text-xs text-muted-foreground font-medium">Public</span>
         </div>
       </div>
 
@@ -153,7 +155,8 @@ export function AIConcernsByCompanyChart({ className }: AIConcernsByCompanyChart
                     x={xPos}
                     y={chartHeight - 10}
                     textAnchor="middle"
-                    className="fill-muted-foreground text-[10px]"
+                    className="fill-muted-foreground"
+                    style={{ fontSize: isMobile ? 13 : 10 }}
                   >
                     {tick}%
                   </text>
@@ -164,7 +167,8 @@ export function AIConcernsByCompanyChart({ className }: AIConcernsByCompanyChart
               x={labelColumnWidth}
               y={chartHeight - 10}
               textAnchor="middle"
-              className="fill-muted-foreground text-[10px]"
+              className="fill-muted-foreground"
+              style={{ fontSize: isMobile ? 13 : 10 }}
             >
               0%
             </text>
@@ -226,13 +230,14 @@ export function AIConcernsByCompanyChart({ className }: AIConcernsByCompanyChart
                     textAnchor="end"
                     dominantBaseline="middle"
                     className={cn(
-                      "text-[11px] transition-opacity",
+                      "transition-opacity",
                       prefersReducedMotion ? "duration-0" : "duration-500",
                       isVisible ? "opacity-100" : "opacity-0"
                     )}
                     fill={isTopConcern ? "#0a0a0a" : "#525252"}
                     fontWeight={isTopConcern ? 600 : 500}
                     style={{
+                      fontSize: isMobile ? 14 : 11,
                       transitionDelay: prefersReducedMotion
                         ? "0ms"
                         : `${index * 50 + 200}ms`,

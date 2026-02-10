@@ -9,6 +9,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface GovernanceChallenge {
   challenge: string;
@@ -38,6 +39,7 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
+  const isMobile = useIsMobile();
 
   // Intersection observer for scroll-triggered animation
   useEffect(() => {
@@ -126,7 +128,8 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
               x={centerX - maxBarWidth / 2 - 20}
               y={20}
               textAnchor="middle"
-              className="fill-muted-foreground text-[11px] font-semibold uppercase tracking-wider"
+              className="fill-muted-foreground font-semibold uppercase tracking-wider"
+              style={{ fontSize: isMobile ? 14 : 11 }}
             >
               Private
             </text>
@@ -134,7 +137,8 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
               x={centerX + maxBarWidth / 2 + 20}
               y={20}
               textAnchor="middle"
-              className="fill-muted-foreground text-[11px] font-semibold uppercase tracking-wider"
+              className="fill-muted-foreground font-semibold uppercase tracking-wider"
+              style={{ fontSize: isMobile ? 14 : 11 }}
             >
               Public
             </text>
@@ -234,13 +238,14 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
                     y={yPosition + barHeight / 2 + 5}
                     textAnchor="end"
                     className={cn(
-                      "text-[11px] transition-opacity",
+                      "transition-opacity",
                       prefersReducedMotion ? "duration-0" : "duration-500",
                       isVisible ? "opacity-100" : "opacity-0"
                     )}
                     fill={isHighlight ? "#0a0a0a" : "#525252"}
                     fontWeight={isHighlight ? 600 : 500}
                     style={{
+                      fontSize: isMobile ? 14 : 11,
                       transitionDelay: prefersReducedMotion
                         ? "0ms"
                         : `${index * 80 + 200}ms`,
@@ -286,12 +291,13 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
                     y={yPosition + barHeight / 2 + 5}
                     textAnchor={privateWidth >= 40 ? "start" : "end"}
                     className={cn(
-                      "text-[11px] font-bold transition-opacity",
+                      "font-bold transition-opacity",
                       prefersReducedMotion ? "duration-0" : "duration-500",
                       isVisible ? "opacity-100" : "opacity-0"
                     )}
                     fill={privateWidth >= 40 ? "#ffffff" : privateColor}
                     style={{
+                      fontSize: isMobile ? 14 : 11,
                       transitionDelay: prefersReducedMotion
                         ? "0ms"
                         : `${index * 80 + 400}ms`,
@@ -338,12 +344,13 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
                     y={yPosition + barHeight / 2 + 5}
                     textAnchor={publicWidth >= 40 ? "end" : "start"}
                     className={cn(
-                      "text-[11px] font-bold transition-opacity",
+                      "font-bold transition-opacity",
                       prefersReducedMotion ? "duration-0" : "duration-500",
                       isVisible ? "opacity-100" : "opacity-0"
                     )}
                     fill={publicWidth >= 40 ? "#ffffff" : publicColor}
                     style={{
+                      fontSize: isMobile ? 14 : 11,
                       transitionDelay: prefersReducedMotion
                         ? "0ms"
                         : `${index * 80 + 450}ms`,
@@ -374,7 +381,8 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
                     x={centerX - offset}
                     y={chartHeight - 8}
                     textAnchor="middle"
-                    className="fill-muted-foreground text-[10px]"
+                    className="fill-muted-foreground"
+                    style={{ fontSize: isMobile ? 13 : 10 }}
                   >
                     {tick}%
                   </text>
@@ -382,7 +390,8 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
                     x={centerX + offset}
                     y={chartHeight - 8}
                     textAnchor="middle"
-                    className="fill-muted-foreground text-[10px]"
+                    className="fill-muted-foreground"
+                    style={{ fontSize: isMobile ? 13 : 10 }}
                   >
                     {tick}%
                   </text>
@@ -393,7 +402,8 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
               x={centerX}
               y={chartHeight - 8}
               textAnchor="middle"
-              className="fill-muted-foreground text-[10px]"
+              className="fill-muted-foreground"
+              style={{ fontSize: isMobile ? 13 : 10 }}
             >
               0%
             </text>
