@@ -105,7 +105,7 @@ export function AIGovernanceChallengesChart({ className }: { className?: string 
           setIsVisible(true);
         }
       },
-      { threshold: 0.4 }
+      { threshold: 0.1 }
     );
 
     if (containerRef.current) {

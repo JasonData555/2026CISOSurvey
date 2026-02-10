@@ -47,7 +47,7 @@ export function AIGovernanceChallengesByCompanyChart({ className }: AIGovernance
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     if (containerRef.current) {

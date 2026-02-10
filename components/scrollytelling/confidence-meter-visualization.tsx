@@ -141,7 +141,7 @@ export function ConfidenceMeterVisualization({ className }: ConfidenceMeterVisua
           setIsVisible(true);
         }
       },
-      { threshold: 0.4 }
+      { threshold: 0.1 }
     );
 
     if (containerRef.current) {
