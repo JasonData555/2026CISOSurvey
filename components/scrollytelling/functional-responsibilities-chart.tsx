@@ -113,7 +113,7 @@ const FUNCTION_DATA: FunctionData[] = [
     description: "Enterprise-wide risk assessment and business continuity"
   },
   {
-    name: "IT / BizApps",
+    name: "Business Applications",
     percentage: 34,
     category: "infrastructure",
     fill: "#b8ba5f",
