@@ -28,7 +28,7 @@ export function SectionWrapper({
           setIsVisible(true);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.05 }
     );
 
     if (ref.current) {
