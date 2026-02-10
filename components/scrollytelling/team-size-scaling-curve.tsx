@@ -178,7 +178,6 @@ function CustomTooltip({ active, payload }: CustomTooltipProps) {
         {data.employees} Employees
       </p>
       <p className="text-2xl font-bold text-primary">{data.teamSize}</p>
-      <p className="text-sm text-muted-foreground">security personnel</p>
       <div className="mt-2 pt-2 border-t border-border">
         <p className="text-xs font-medium text-foreground">{data.phase}</p>
       </div>
@@ -248,7 +247,7 @@ export function TeamSizeScalingCurve() {
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
               data={smoothCurveData}
-              margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
+              margin={{ top: 20, right: 20, left: 60, bottom: 20 }}
             >
               <defs>
                 <linearGradient id="teamSizeGradient" x1="0" y1="0" x2="0" y2="1">
@@ -320,7 +319,7 @@ export function TeamSizeScalingCurve() {
         </div>
         
         {/* Y-axis label */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 origin-center">
+        <div className="absolute left-3 top-1/2 -translate-y-1/2 -rotate-90 origin-center">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground whitespace-nowrap">
             Avg. Team Size
           </span>
