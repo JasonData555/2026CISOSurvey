@@ -262,8 +262,10 @@ export function ConfidenceMeterVisualization({ className }: ConfidenceMeterVisua
       {/* Additional context */}
       <div className="text-xs text-muted-foreground pt-2 border-t border-border">
         <p>
-          Only <strong className="text-foreground">16%</strong> of CISOs express high confidence. 
+          Only <strong className="text-foreground">16%</strong> of CISOs express high confidence.
           The majority report &quot;somewhat confident&quot; (45-48%), while 34-35% admit lacking confidence entirely.
+          When organizations can&apos;t assess technical depth, they default to proxies like credentials and brand names.
+          This potentially results in growing headcount without growing capability and increasing risk with each hiring cycle.
         </p>
       </div>
     </div>

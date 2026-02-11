@@ -20,8 +20,8 @@ interface AIConcern {
 }
 
 const aiConcernsData: AIConcern[] = [
-  { concern: "Data exposure/privacy breaches", shortLabel: "Data Exposure", private: 72, public: 80, isTopConcern: true },
-  { concern: "Shadow AI usage bypassing security controls", shortLabel: "Shadow AI Bypass", private: 46, public: 53, isTopConcern: true },
+  { concern: "Data exposure/privacy breaches", shortLabel: "Data Exposure", private: 72, public: 80 },
+  { concern: "Shadow AI usage bypassing security controls", shortLabel: "Shadow AI Bypass", private: 46, public: 53 },
   { concern: "Integration with critical systems creating attack vectors", shortLabel: "Attack Vectors", private: 38, public: 43 },
   { concern: "Dependency on AI vendors with unclear security practices", shortLabel: "Vendor Security", private: 25, public: 18 },
   { concern: "Regulatory compliance violations", shortLabel: "Compliance", private: 21, public: 18 },

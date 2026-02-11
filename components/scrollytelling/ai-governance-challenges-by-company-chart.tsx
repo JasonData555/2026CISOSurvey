@@ -20,8 +20,8 @@ interface GovernanceChallenge {
 }
 
 const governanceData: GovernanceChallenge[] = [
-  { challenge: "Shadow AI", shortLabel: "Shadow AI", private: 24, public: 28, isHighlight: true },
-  { challenge: "Defining clear accountability/ownership for AI risk across the business", shortLabel: "AI Accountability", private: 24, public: 23, isHighlight: true },
+  { challenge: "Shadow AI", shortLabel: "Shadow AI", private: 24, public: 28 },
+  { challenge: "Defining clear accountability/ownership for AI risk across the business", shortLabel: "AI Accountability", private: 24, public: 23 },
   { challenge: "AI TPRM", shortLabel: "AI TPRM", private: 19, public: 16 },
   { challenge: "Ensuring transparency and explainability of AI-driven decisions", shortLabel: "Transparency", private: 11, public: 11 },
   { challenge: "Aligning AI security with enterprise risk management frameworks", shortLabel: "Risk Alignment", private: 9, public: 11 },

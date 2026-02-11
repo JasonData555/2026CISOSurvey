@@ -20,7 +20,7 @@ interface FrameworkData {
 }
 
 const frameworkData: FrameworkData[] = [
-  { framework: "NIST AI Risk Management Framework (AI RMF)", shortLabel: "NIST AI RMF", private: 57, public: 67, isLeading: true },
+  { framework: "NIST AI Risk Management Framework (AI RMF)", shortLabel: "NIST AI RMF", private: 57, public: 67 },
   { framework: "EU AI Act requirements (compliance-driven)", shortLabel: "EU AI Act", private: 15, public: 23 },
   { framework: "ISO/IEC 23894 (AI Risk Management)", shortLabel: "ISO/IEC 23894", private: 22, public: 18 },
   { framework: "Internal / proprietary AI risk framework", shortLabel: "Internal Framework", private: 18, public: 17 },
