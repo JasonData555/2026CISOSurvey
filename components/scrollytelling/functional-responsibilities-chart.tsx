@@ -241,7 +241,7 @@ export function FunctionalResponsibilitiesChart({ className }: FunctionalRespons
         <BarChart
           data={FUNCTION_DATA}
           layout="vertical"
-          margin={{ top: 5, right: 20, left: 0, bottom: 5 }}
+          margin={{ top: 5, right: 5, left: 10, bottom: 5 }}
         >
           <XAxis
             type="number"
@@ -253,9 +253,9 @@ export function FunctionalResponsibilitiesChart({ className }: FunctionalRespons
           <YAxis
             type="category"
             dataKey="name"
-            width={isMobile ? 100 : 180}
+            width={isMobile ? 100 : 200}
             stroke="#737373"
-            tick={{ fontSize: isMobile ? 11 : 13 }}
+            tick={{ fontSize: isMobile ? 11 : 13, textAnchor: "start", dx: isMobile ? -95 : -195 }}
             tickFormatter={(value) => isMobile ? truncateLabel(value, 12) : value}
           />
           <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0, 48, 135, 0.05)" }} />

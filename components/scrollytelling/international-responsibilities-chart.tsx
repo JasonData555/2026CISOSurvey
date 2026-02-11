@@ -287,7 +287,7 @@ export function InternationalResponsibilitiesChart({ className }: { className?: 
           <BarChart
             data={responsibilitiesData}
             layout="vertical"
-            margin={{ top: 5, right: 15, left: isMobile ? 80 : 180, bottom: 5 }}
+            margin={{ top: 5, right: 5, left: 10, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" horizontal={false} vertical={true} />
             <XAxis
@@ -301,10 +301,10 @@ export function InternationalResponsibilitiesChart({ className }: { className?: 
             <YAxis
               type="category"
               dataKey="name"
-              tick={{ fontSize: isMobile ? 9 : 12, fill: "#525252", fontWeight: 500 }}
+              tick={{ fontSize: isMobile ? 9 : 12, fill: "#525252", fontWeight: 500, textAnchor: "start", dx: isMobile ? -95 : -195 }}
               axisLine={false}
               tickLine={false}
-              width={isMobile ? 75 : 170}
+              width={isMobile ? 100 : 200}
               tickFormatter={(value) => isMobile ? truncateLabel(value, 10) : value}
             />
             <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0, 48, 135, 0.04)" }} />

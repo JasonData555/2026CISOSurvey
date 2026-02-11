@@ -130,9 +130,18 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
 
 export function BoardReportingChart({ className }: { className?: string }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const animationDuration = prefersReducedMotion ? 0 : (isVisible ? 800 : 0);
+
+  // Mobile detection for responsive layout
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -150,6 +159,12 @@ export function BoardReportingChart({ className }: { className?: string }) {
 
     return () => observer.disconnect();
   }, []);
+
+  // Truncate labels for mobile display
+  const truncateLabel = (label: string, maxLength: number) => {
+    if (label.length <= maxLength) return label;
+    return label.slice(0, maxLength - 1) + '…';
+  };
 
   return (
     <div ref={containerRef} className={cn("w-full", className)}>
@@ -169,7 +184,7 @@ export function BoardReportingChart({ className }: { className?: string }) {
           <BarChart
             data={boardReportingData}
             layout="vertical"
-            margin={{ top: 20, right: 80, left: 80, bottom: 20 }}
+            margin={{ top: 20, right: 5, left: 10, bottom: 20 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" horizontal={false} vertical={true} />
             <XAxis
@@ -184,10 +199,11 @@ export function BoardReportingChart({ className }: { className?: string }) {
             <YAxis
               type="category"
               dataKey="frequency"
-              tick={{ fontSize: 12, fill: "#525252", fontWeight: 500 }}
+              tick={{ fontSize: isMobile ? 11 : 12, fill: "#525252", fontWeight: 500, textAnchor: "start", dx: isMobile ? -95 : -195 }}
               axisLine={false}
               tickLine={false}
-              width={100}
+              width={isMobile ? 100 : 200}
+              tickFormatter={isMobile ? (value) => truncateLabel(value, 12) : undefined}
             />
             <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0, 48, 135, 0.04)" }} />
 

@@ -96,12 +96,21 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
 
 export function IndustryCompensationChart({ className }: { className?: string }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const animationDuration = prefersReducedMotion ? 0 : (isVisible ? 800 : 0);
 
   // Bar height for consistent sizing
   const barHeight = 24;
+
+  // Mobile detection for responsive layout
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -119,6 +128,12 @@ export function IndustryCompensationChart({ className }: { className?: string })
 
     return () => observer.disconnect();
   }, []);
+
+  // Truncate labels for mobile display
+  const truncateLabel = (label: string, maxLength: number) => {
+    if (label.length <= maxLength) return label;
+    return label.slice(0, maxLength - 1) + '…';
+  };
 
   return (
     <div ref={containerRef} className={cn("w-full", className)}>
@@ -143,7 +158,7 @@ export function IndustryCompensationChart({ className }: { className?: string })
           <BarChart
             data={industryData}
             layout="vertical"
-            margin={{ top: 10, right: 20, left: 10, bottom: 10 }}
+            margin={{ top: 10, right: 5, left: 10, bottom: 10 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" horizontal={true} vertical={false} />
             <XAxis
@@ -158,13 +173,16 @@ export function IndustryCompensationChart({ className }: { className?: string })
               type="category"
               dataKey="industry"
               tick={{
-                fontSize: 11,
+                fontSize: isMobile ? 11 : 12,
                 fill: "#525252",
                 fontWeight: 500,
+                textAnchor: "start",
+                dx: isMobile ? -95 : -195,
               }}
               axisLine={false}
               tickLine={false}
-              width={200}
+              width={isMobile ? 100 : 200}
+              tickFormatter={isMobile ? (value) => truncateLabel(value, 12) : undefined}
             />
             <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0, 48, 135, 0.04)" }} wrapperStyle={{ zIndex: 1000, pointerEvents: 'none' }} allowEscapeViewBox={{ x: true, y: false }} />
             <Bar
