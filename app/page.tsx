@@ -35,6 +35,7 @@ import { PersonalLiabilityChart } from "@/components/scrollytelling/personal-lia
 import { AIGovernanceChallengesByCompanyChart } from "@/components/scrollytelling/ai-governance-challenges-by-company-chart";
 import { AIConcernsByCompanyChart } from "@/components/scrollytelling/ai-concerns-by-company-chart";
 import { AIGovernanceFrameworksChart } from "@/components/scrollytelling/ai-governance-frameworks-chart";
+import { CISOTenureChart } from "@/components/scrollytelling/ciso-tenure-chart";
 
 export default function CISOReport2026() {
   return (
@@ -446,7 +447,7 @@ export default function CISOReport2026() {
           </SidebarColumn>
         </ContentRow>
 
-        <ContentRow>
+        <ContentRow className="mb-12">
           <PrimaryColumn>
             <p className="text-muted-foreground leading-relaxed">
               The &ldquo;federation effect&rdquo; becomes visible for organizations larger than 10,000 employees,
@@ -456,6 +457,22 @@ export default function CISOReport2026() {
               to governance, influence, and strategic oversight across federated security capabilities.
             </p>
           </PrimaryColumn>
+        </ContentRow>
+
+        <ContentRow>
+          <PrimaryColumn>
+            <SubsectionHeader
+              title="CISO Tenure by Company Size"
+              description="Average tenure patterns reveal retention challenges at smaller organizations."
+            />
+            <CISOTenureChart />
+          </PrimaryColumn>
+          <SidebarColumn>
+            <div className="space-y-4">
+              <MetricCard value="44 mo" label="Public Company Tenure" sentiment="neutral" />
+              <MetricCard value="36 mo" label="Private Company Tenure" sentiment="neutral" />
+            </div>
+          </SidebarColumn>
         </ContentRow>
       </SectionWrapper>
 
