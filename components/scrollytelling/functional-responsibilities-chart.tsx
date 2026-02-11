@@ -170,6 +170,21 @@ const FUNCTION_DATA: FunctionData[] = [
   },
 ];
 
+// Mobile-friendly abbreviated labels
+const mobileLabels: Record<string, string> = {
+  "Incident Response": "Incident Resp",
+  "Cloud Security": "Cloud Sec",
+  "AI Data Protection": "AI Data Prot",
+  "ProdSec / AppSec": "Prod/AppSec",
+  "AI Threat Intel & IR": "AI Threat IR",
+  "Governance & Risk": "Gov & Risk",
+  "Enterprise Risk": "Ent Risk",
+  "Business Applications": "Biz Apps",
+  "AI Safety & Reliability": "AI Safety",
+  "Physical Security / Exec Protection": "Physical Sec",
+  "Post-Quantum Cryptography": "Post-Quantum",
+};
+
 interface CustomTooltipProps {
   active?: boolean;
   payload?: Array<{
@@ -229,11 +244,6 @@ export function FunctionalResponsibilitiesChart({ className }: FunctionalRespons
     return () => observer.disconnect();
   }, []);
 
-  // Truncate labels for mobile display
-  const truncateLabel = (label: string, maxLength: number) => {
-    if (label.length <= maxLength) return label;
-    return label.slice(0, maxLength - 1) + '…';
-  };
 
   return (
     <div ref={containerRef} className={cn("w-full", className)}>
@@ -256,7 +266,7 @@ export function FunctionalResponsibilitiesChart({ className }: FunctionalRespons
             width={isMobile ? 100 : 200}
             stroke="#737373"
             tick={{ fontSize: isMobile ? 11 : 13, textAnchor: "start", dx: isMobile ? -95 : -195 }}
-            tickFormatter={(value) => isMobile ? truncateLabel(value, 12) : value}
+            tickFormatter={(value) => isMobile ? (mobileLabels[value] ?? value) : value}
           />
           <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0, 48, 135, 0.05)" }} />
           <Bar

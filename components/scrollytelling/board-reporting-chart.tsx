@@ -65,6 +65,13 @@ const boardReportingData = [
   gapLeader: item.public > item.private ? "Public" : "Private"
 }));
 
+// Mobile-friendly abbreviated labels
+const mobileLabels: Record<string, string> = {
+  "Semi-annually": "Semi-annual",
+  "Does not report": "No Report",
+  "Per request": "On Request",
+};
+
 interface CustomTooltipProps {
   active?: boolean;
   payload?: Array<{
@@ -160,11 +167,6 @@ export function BoardReportingChart({ className }: { className?: string }) {
     return () => observer.disconnect();
   }, []);
 
-  // Truncate labels for mobile display
-  const truncateLabel = (label: string, maxLength: number) => {
-    if (label.length <= maxLength) return label;
-    return label.slice(0, maxLength - 1) + '…';
-  };
 
   return (
     <div ref={containerRef} className={cn("w-full", className)}>
@@ -203,7 +205,7 @@ export function BoardReportingChart({ className }: { className?: string }) {
               axisLine={false}
               tickLine={false}
               width={isMobile ? 100 : 200}
-              tickFormatter={isMobile ? (value) => truncateLabel(value, 12) : undefined}
+              tickFormatter={isMobile ? (value) => mobileLabels[value] ?? value : undefined}
             />
             <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0, 48, 135, 0.04)" }} />
 

@@ -43,6 +43,27 @@ const industryData = [
   { industry: "Professional Services", base: 321, bonus: 86, equity: 0, total: 407, description: "Consulting and professional services" },
 ];
 
+// Mobile-friendly abbreviated labels
+const mobileLabels: Record<string, string> = {
+  "Consumer Software & Internet": "Consumer SW",
+  "Media / Entertainment": "Media/Ent",
+  "Logistics / Transportation": "Logistics",
+  "Enterprise Software": "Enterprise SW",
+  "Artificial Intelligence (AI)": "AI",
+  "Food & Beverage": "Food & Bev",
+  "BioTech & Pharma": "BioTech",
+  "Energy & Utilities": "Energy/Util",
+  "Cloud Infrastructure": "Cloud Infra",
+  "Banking / Financial Services": "Banking/FS",
+  "Aerospace & Defense": "Aero/Defense",
+  "Consumer Packaged Goods": "CPG",
+  "Industrial / Manufacturing": "Industrial",
+  "EdTech & Education": "EdTech",
+  "Big Data / Analytics": "Big Data",
+  "Leisure / Hospitality": "Hospitality",
+  "Professional Services": "Prof Services",
+};
+
 interface CustomTooltipProps {
   active?: boolean;
   payload?: Array<{
@@ -129,11 +150,6 @@ export function IndustryCompensationChart({ className }: { className?: string })
     return () => observer.disconnect();
   }, []);
 
-  // Truncate labels for mobile display
-  const truncateLabel = (label: string, maxLength: number) => {
-    if (label.length <= maxLength) return label;
-    return label.slice(0, maxLength - 1) + '…';
-  };
 
   return (
     <div ref={containerRef} className={cn("w-full", className)}>
@@ -182,7 +198,7 @@ export function IndustryCompensationChart({ className }: { className?: string })
               axisLine={false}
               tickLine={false}
               width={isMobile ? 100 : 200}
-              tickFormatter={isMobile ? (value) => truncateLabel(value, 12) : undefined}
+              tickFormatter={isMobile ? (value) => mobileLabels[value] ?? value : undefined}
             />
             <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0, 48, 135, 0.04)" }} wrapperStyle={{ zIndex: 1000, pointerEvents: 'none' }} allowEscapeViewBox={{ x: true, y: false }} />
             <Bar

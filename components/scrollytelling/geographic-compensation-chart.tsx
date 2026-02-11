@@ -43,6 +43,12 @@ const geoCompensationData = [
   { city: "Nashville", base: 261, bonus: 74, equity: 52, total: 387, description: "Healthcare industry and emerging tech scene" },
 ];
 
+// Mobile-friendly abbreviated labels
+const mobileLabels: Record<string, string> = {
+  "Raleigh-Durham": "Raleigh-Dur",
+  "Salt Lake City": "Salt Lake",
+};
+
 interface CustomTooltipProps {
   active?: boolean;
   payload?: Array<{
@@ -129,11 +135,6 @@ export function GeographicCompensationChart({ className }: { className?: string 
     return () => observer.disconnect();
   }, []);
 
-  // Truncate labels for mobile display
-  const truncateLabel = (label: string, maxLength: number) => {
-    if (label.length <= maxLength) return label;
-    return label.slice(0, maxLength - 1) + '…';
-  };
 
   return (
     <div ref={containerRef} className={cn("w-full", className)}>
@@ -182,7 +183,7 @@ export function GeographicCompensationChart({ className }: { className?: string 
               axisLine={false}
               tickLine={false}
               width={isMobile ? 100 : 200}
-              tickFormatter={isMobile ? (value) => truncateLabel(value, 12) : undefined}
+              tickFormatter={isMobile ? (value) => mobileLabels[value] ?? value : undefined}
             />
             <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0, 48, 135, 0.04)" }} wrapperStyle={{ zIndex: 1000, pointerEvents: 'none' }} allowEscapeViewBox={{ x: true, y: false }} />
             <Bar

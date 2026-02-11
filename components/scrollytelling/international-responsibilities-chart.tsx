@@ -194,6 +194,21 @@ const responsibilitiesData = [
   },
 ];
 
+// Mobile-friendly abbreviated labels
+const mobileLabels: Record<string, string> = {
+  "Cloud Security": "Cloud Sec",
+  "Incident Response": "Incident Resp",
+  "Corporate/IT Security": "Corp/IT Sec",
+  "ProdSec/AppSec": "Prod/AppSec",
+  "AI Data Protection": "AI Data Prot",
+  "AI Threat Intel & IR": "AI Threat IR",
+  "Enterprise Risk": "Ent Risk",
+  "Governance & Risk": "Gov & Risk",
+  "Physical Security / Exec Protection": "Physical Sec",
+  "Post-Quantum Cryptography": "Post-Quantum",
+  "AI Safety & Reliability": "AI Safety",
+};
+
 interface CustomTooltipProps {
   active?: boolean;
   payload?: Array<{
@@ -263,11 +278,6 @@ export function InternationalResponsibilitiesChart({ className }: { className?: 
     return () => observer.disconnect();
   }, []);
 
-  // Truncate labels for mobile display
-  const truncateLabel = (label: string, maxLength: number) => {
-    if (label.length <= maxLength) return label;
-    return label.slice(0, maxLength - 1) + '…';
-  };
 
   return (
     <div ref={containerRef} className={cn("w-full", className)}>
@@ -305,7 +315,7 @@ export function InternationalResponsibilitiesChart({ className }: { className?: 
               axisLine={false}
               tickLine={false}
               width={isMobile ? 100 : 200}
-              tickFormatter={(value) => isMobile ? truncateLabel(value, 10) : value}
+              tickFormatter={(value) => isMobile ? (mobileLabels[value] ?? value) : value}
             />
             <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0, 48, 135, 0.04)" }} />
 
