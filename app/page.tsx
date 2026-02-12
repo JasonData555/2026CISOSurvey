@@ -469,8 +469,8 @@ export default function CISOReport2026() {
           </PrimaryColumn>
           <SidebarColumn>
             <div className="space-y-4">
-              <MetricCard value="44 mo" label="Public Company Tenure" sentiment="neutral" />
-              <MetricCard value="36 mo" label="Private Company Tenure" sentiment="neutral" />
+              <MetricCard value="44 mo" label="Avg Current Tenure Public Company" sentiment="neutral" />
+              <MetricCard value="36 mo" label="Avg Current Tenure Private Company" sentiment="neutral" />
             </div>
           </SidebarColumn>
         </ContentRow>

@@ -157,8 +157,8 @@ export function CISOTenureChart({ className }: { className?: string }) {
       {/* Key Insight */}
       <div className="mt-6 border-l-4 border-primary bg-accent p-4">
         <p className="text-sm text-foreground font-medium">
-          CISOs at sub-500 employee companies average just <strong className="text-primary">28 months</strong> tenure
-          (40% shorter than the 47-month average at mid-market firms). The role at this stage is often
+          CISOs at sub-500 employee companies average just <strong className="text-primary">28 months</strong> tenure in their current role
+          (40% shorter than the 47-month average at mid-market firms). The CISO at this stage is often
           under-resourced, under-scoped, and positioned as a checkbox rather than a function.
         </p>
       </div>
