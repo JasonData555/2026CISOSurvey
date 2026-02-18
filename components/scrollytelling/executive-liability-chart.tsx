@@ -60,8 +60,8 @@ export function ExecutiveLiabilityChart({ className }: ExecutiveLiabilityChartPr
   const barHeight = 52;
   const barGap = 14;
   const chartWidth = 700; // Expanded from 600 to accommodate left labels
-  const labelColumnWidth = 100; // Left column for category labels
-  const centerX = 400; // Center of chart area (labelColumnWidth + 300)
+  const labelColumnWidth = 130; // Left column for category labels
+  const centerX = 430; // Center of chart area (labelColumnWidth + 300)
   const maxBarWidth = 200; // Max width for bars on each side
 
   // Find max value for scaling
